@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import OrderModel from "../models/OrderModel.js";
-import UserModel from "../models/userModel.js";
+import UserModel from "../models/UserModel.js";
 
 const placeOrder = async (req, res) => {
   try {
