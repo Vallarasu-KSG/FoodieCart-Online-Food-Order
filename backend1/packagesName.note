@@ -3,7 +3,7 @@
 03.npm i express             => connect with server
 04.npm i mongoose            => connect with database
 05.npm i jsonwebtoken        => we will create Authentication system
-06.npm i bcrypt              => we will encryt users data and store in the database
+06.npm i bcryptjs              => we will encryt users data and store in the database
 07.npm i cors                => permison backent to frontend
 08.npm i dotenv
 09.npm i body-parser
