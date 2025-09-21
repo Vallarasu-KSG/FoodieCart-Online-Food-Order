@@ -1,0 +1,13 @@
+/* DiscountSticker.css */
+.discount-sticker {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.discount-sticker p {
+  font-size: 14px;
+  color: #333;
+}

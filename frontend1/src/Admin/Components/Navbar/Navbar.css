@@ -1,0 +1,81 @@
+/* Navbar.css */
+.admin-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 4%;
+    border-bottom: 1px solid gray;
+    background-color: #f8f9fa; /* Optional background color */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin-navbar a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-navbar p {
+    margin-left: 10px;
+    font-size: 18px; /* Add font size for consistency */
+    font-weight: bold;
+    color: #333; /* Optional text color */
+}
+
+/* Images inside navbar */
+.admin-navbar .nav-img-1 {
+    width: auto;
+    height: 50px;
+    /* Uncomment if you want to ensure the logo image fits within the height */
+    /* object-fit: contain; */
+}
+
+.admin-navbar .nav-img-2 {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%; /* Optional rounded style for image 2 */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .admin-navbar {
+        display: flex;
+        padding: 8px 2%;
+    }
+
+    .admin-navbar .nav-img-1 {
+        height: 40px;
+    }
+
+    .admin-navbar .nav-img-2 {
+        width: 35px;
+        height: 35px;
+    }
+
+    .admin-navbar p {
+        font-size: 16px; /* Reduce font size for medium screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .admin-navbar {
+        padding: 8px;
+    }
+
+    .admin-navbar .nav-img-1 {
+        height: 35px;
+    }
+
+    .admin-navbar .nav-img-2 {
+        width: 30px;
+        height: 30px;
+    }
+
+    .admin-navbar .navbar p {
+        font-size: 14px; /* Smaller font size for mobile */
+    }
+}

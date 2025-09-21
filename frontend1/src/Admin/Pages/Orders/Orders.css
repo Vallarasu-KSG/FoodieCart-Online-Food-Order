@@ -1,0 +1,156 @@
+/* General Styles */
+.order {
+  /* padding: 20px; */
+  width: 100%;
+  overflow: auto;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  height: 90vh;
+}
+
+.order h3 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Order List Styles */
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Order Item Styles */
+.order-item {
+  display: grid;
+  grid-template-columns: 60px 2fr 1fr 1fr 1fr;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.order-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Order Item Image */
+.order-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Food Item Text */
+.order-item-food {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* Address and Name Styling */
+.order-item-name {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.order-item-name p {
+  margin: 2px 0;
+}
+
+/* Phone Number Styling */
+.order-item-phone {
+  color: #888;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* Select Dropdown */
+.order-item select {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.order-item select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Price and Item Count */
+.order-item p {
+  margin: 5px 0;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .order-item {
+    grid-template-columns: 60px 1.5fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 15px;
+  }
+
+  .order-item select {
+    grid-column: span 3;
+    justify-self: start;
+  }
+
+  .order-item p {
+    font-size: 13px;
+  }
+
+  .order-item img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .order h3 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .order {
+    padding: 10px;
+  }
+
+  .order-item {
+    grid-template-columns: 50px 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .order-item select {
+    justify-self: stretch;
+  }
+
+  .order-item img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .order-item p {
+    font-size: 12px;
+  }
+
+  .order h3 {
+    font-size: 20px;
+  }
+}

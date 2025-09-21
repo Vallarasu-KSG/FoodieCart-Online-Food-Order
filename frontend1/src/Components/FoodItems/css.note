@@ -1,0 +1,175 @@
+/* Container styles */
+.food-items {
+    width: 100%;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(22, 22, 22, 0.1);
+    transition: 0.3s;
+    animation: fadeIn 1s;
+    background-color: #fff;
+}
+
+/* Image styles */
+.food-item-image {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+}
+
+/* Info container */
+.food-item-info {
+    padding: 15px 20px;
+}
+
+/* Name and rating */
+.food-item-name-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.food-item-name-rating p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.food-item-name-rating svg {
+    width: 20px;
+    fill: #f4c10f;
+}
+
+/* Price styling */
+.food-item-price {
+    color: red;
+    font-size: 18px;
+    margin: 10px 0;
+    text-decoration: line-through;
+}
+
+.food-item-price del {
+    margin-right: 10px;
+    color: #777;
+}
+
+/* Category and address */
+.food-item-category {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.food-item-category a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.food-item-category a:hover {
+    text-decoration: underline;
+}
+
+/* Image container and add button */
+.food-item-image-container {
+    position: relative;
+}
+
+.food-item-image-container .add1 {
+    width: 30px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgba(243, 244, 245, 0.8);
+    transition: background-color 0.3s;
+}
+
+.food-item-image-container .add1:hover {
+    background-color: rgba(200, 200, 200, 0.9);
+}
+
+/* Counter styles */
+.food-item-counter {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px;
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.food-item-counter svg {
+    width: 25px;
+    cursor: pointer;
+}
+
+.food-item-counter .remove-icon {
+    background-color: rgba(253, 6, 6, 0.2);
+    fill: red;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+.food-item-counter .add-icon {
+    background-color: rgba(4, 252, 57, 0.2);
+    fill: green;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+.food-item-counter p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Invoice buttons */
+.invoicebtns {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.buy-btn {
+    border: none;
+    background-color: #131212;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.buy-btn:hover {
+    background-color: #42403f;
+}
+
+.save-btn {
+    border: none;
+    background-color: #131212;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex-grow: 0;
+}
+
+.save-btn:hover {
+    background-color: #42403f;
+}
+
+/* Star icon */
+.food-item-info svg {
+    fill: #f4c10f;
+    margin-top: 5px;
+    display: block;
+}

@@ -1,0 +1,169 @@
+/* List Container */
+.admin-list {
+  width: 96.5%;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  height: 88vh;
+  overflow: hidden;
+}
+
+.admin-add {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} 
+
+.admin-list p {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+/* Table Styles */
+.list-table-container {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.list-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 600px; /* Set a minimum width for table, adjust as needed */
+}
+
+.list-table th,
+.list-table td {
+  padding: 8px 12px;
+  text-align: center;
+  /* text-align: left; */
+}
+
+.list-table th {
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+}
+
+.list-table td {
+  text-align: center;
+  border-bottom: 1px solid #979292;
+}
+
+.list-table-format {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Hover effect on rows */
+.list-table-format:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.titles {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Images */
+.list-table img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  vertical-align: middle;  /* Ensure the image aligns with text */
+}
+
+/* Close Icon (Remove button) */
+.close img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  vertical-align: middle;  /* Align remove icon with the text */
+  margin-left: 10px; /* Ensure some spacing between image and text */
+}
+
+.close img:hover {
+  transform: scale(1.2);
+}
+
+/* Scrollable Rows */
+.scrollable-rows {
+  display: block; /* Makes the tbody behave like a block element */
+  max-height: 70vh; /* Set your desired height */
+  overflow: auto; /* Enable vertical scroll */
+}
+
+.scrollable-rows tr {
+  display: table; /* Maintain table structure */
+  width: 100%; /* Ensure rows span the full table width */
+  table-layout: fixed; /* Fix column width */
+  overflow-x: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-list {
+    width: 100%;
+    overflow: auto;
+  }
+
+  .list-table-container {
+    overflow-x: auto; /* Enable horizontal scrolling on smaller screens */
+  }
+
+  .list-table th,
+  .list-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .list-table img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .close img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .admin-list {
+    padding: 15px;
+  }
+
+  .admin-list p {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-table th,
+  .list-table td {
+    font-size: 10px;
+    padding: 6px;
+  }
+
+  .list-table img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .close img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .admin-list p {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,111 @@
+/* Global Styles */
+.App {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Title Styling */
+.App h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Menu Container */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Individual Menu Item */
+.menu-item {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  max-width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Menu Item Image */
+.menu-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Menu Item Content */
+.menu-item h2 {
+  font-size: 1.5rem;
+  margin: 10px 15px 5px;
+  color: #555;
+}
+
+.menu-item p {
+  font-size: 0.9rem;
+  margin: 5px 15px 15px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Highlight strong elements */
+.menu-item p strong {
+  color: #333;
+}
+
+/* Responsive Design */
+
+/* Large tablets/desktops */
+@media (max-width: 1200px) {
+  .menu {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 600px) {
+  .menu {
+    grid-template-columns: repeat(2, 1fr); /* show 2 cards per row */
+    gap: 15px; /* reduce gap slightly */
+  }
+
+  .App h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .menu-item h2 {
+    text-align: center;
+    font-size: 0.90rem;
+  }
+
+  .menu-item p {
+    text-align: justify;
+    font-size: 0.70rem;
+  }
+
+  .menu-item strong {
+    display: block;
+  }
+
+  .menu-item img {
+    padding-top: 20px;
+    height: 130px; /* reduce image height for compact view */
+    border-radius: 10px; /* consistent with card */
+  }
+}

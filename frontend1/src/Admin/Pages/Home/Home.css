@@ -1,0 +1,115 @@
+/* OnlineFoodOrderAdminHome.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.admin-home {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.admin-main {
+    flex: 1;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Ensures stats cards stack on small screens */
+}
+
+.stat-card {
+    flex: 1;
+    background: white;
+    margin: 0 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    min-width: 200px; /* Prevents cards from shrinking too small */
+    margin-bottom: 15px; /* Adds spacing between stacked cards */
+}
+
+.stat-card h2 {
+    margin: 0;
+    color: #4CAF50;
+}
+
+.stat-card p {
+    margin: 10px 0 0;
+    color: #555;
+}
+
+.recent-orders {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 65vh;
+    overflow: auto;
+}
+
+.recent-orders table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.recent-orders th, .recent-orders td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.recent-orders th {
+    background-color: #f4f4f4;
+}
+
+.admin-footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .stats {
+        flex-direction: column;
+    }
+
+    .recent-orders {
+        height: auto; /* Allow table to scroll vertically on smaller screens */
+    }
+
+    .recent-orders table {
+        font-size: 14px; /* Adjust font size on smaller screens */
+    }
+
+    .admin-footer {
+        font-size: 14px; /* Make footer text smaller on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-main {
+        padding: 15px; /* Adjust padding for small screens */
+    }
+
+    .stat-card {
+        padding: 15px; /* Reduce padding in stat cards */
+        font-size: 14px; /* Make text smaller */
+    }
+
+    .recent-orders table {
+        font-size: 12px; /* Further reduce font size for mobile */
+    }
+
+    .admin-footer {
+        font-size: 12px; /* Reduce footer font size */
+    }
+}

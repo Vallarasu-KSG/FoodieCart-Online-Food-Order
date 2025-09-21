@@ -1,0 +1,105 @@
+/* ContactPage.css */
+
+/* Basic reset */
+
+  /* Page layout */
+  .contact-page {
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .contact-page h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .contact-page p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+  
+  /* Form styles */
+  .contact-page form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .contact-page label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #444;
+  }
+  
+  .contact-page input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  .contact-page input:focus, textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  
+  .contact-page textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  
+  /* Submit button */
+  .submit-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .submit-btn:active {
+    background-color: #00408d;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 600px) {
+    .contact-page {
+      padding: 20px;
+    }
+  
+    .contact-page form {
+      padding: 20px;
+    }
+  
+    .form-group {
+      margin-bottom: 15px;
+    }
+  
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+    }
+  }
+  

@@ -1,0 +1,8 @@
+step 7
+step 7
+step 7
+step 7
+step 7
+step 7
+step 7 .Context > StoreContext.js => create food list components.
+step 8 .FoodDisplay > FoodDisplay.js =>

@@ -1,0 +1,187 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  color: #343a40;
+  line-height: 1.5;
+}
+
+/* Main Container */
+.placeOrder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 1200px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  gap: 2rem;
+}
+
+/* Left Section */
+.place-Order-Left {
+  flex: 1;
+  padding-right: 1.5rem;
+  border-right: 1px solid #e9ecef;
+}
+
+.place-Order-Left .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #007bff;
+}
+
+.place-Order-Left input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.place-Order-Left input:focus {
+  border-color: #007bff;
+  background-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.place-Order-Left input:hover {
+  background-color: #e9ecef;
+}
+
+
+.hidden-section {
+  display: none;
+}
+
+.show-section {
+  display: block;
+}
+
+
+
+/* Right Section */
+.place-Order-Right {
+  flex: 1;
+  padding-left: 1.5rem;
+}
+
+.place-Order-Right h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #007bff;
+}
+
+.place-Order-Right p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #495057;
+}
+
+.place-Order-Right button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.place-Order-Right button:hover {
+  background-color: #0056b3;
+}
+
+.place-Order-Right button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Payment Method Styles */
+.payment-method {
+  margin-top: 2rem;
+}
+
+.payment-method h2 {
+  margin-bottom: 1rem;
+}
+.payment-option
+{
+  display: flex;
+  justify-content:left;
+  gap: 20px;
+}
+.payment-option label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+}
+
+.payment-option input {
+  margin-right: 0.5rem;
+}
+
+/* UPI and Card Details */
+.upi-details, .card-details {
+  margin-top: 1rem;
+}
+
+.upi-details input, .card-details input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.card-details label {
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .placeOrder {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .place-Order-Left {
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .place-Order-Right {
+    padding-left: 0;
+  }
+
+  .place-Order-Right h1 {
+    font-size: 1.5rem;
+  }
+
+  .place-Order-Right p {
+    font-size: 0.9rem;
+  }
+
+  .place-Order-Right button {
+    font-size: 1rem;
+  }
+}

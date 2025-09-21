@@ -1,0 +1,61 @@
+const FoodModel = require('../models/FoodModel');
+const fs = require('fs'); // 'fs' is built-in
+
+// Add food item
+const addFood = async (req, res) => {
+    // Check if file is uploaded
+    if (!req.file) {
+        return res.status(400).json({
+            success: false,
+            message: "No image file uploaded"
+        });
+    }
+
+    // Validate file type (optional, add if needed)
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!allowedTypes.includes(req.file.mimetype)) {
+        return res.status(400).json({
+            success: false,
+            message: "Invalid file type. Only JPEG, PNG, and GIF are allowed."
+        });
+    }
+
+    // Get the image filename from the uploaded file
+    let image_filename = req.file.filename;
+
+    // Check for missing fields
+    const { name, price, offerPrice, category, address } = req.body;
+    if (!name || !price || !category || !address) {
+        return res.status(400).json({
+            success: false,
+            message: "Missing required fields: name, price, category, address"
+        });
+    }
+
+    // Create a new food item
+    const food = new FoodModel({
+        name,
+        image: image_filename,
+        price,
+        offerPrice,
+        category,
+        address
+    });
+
+    try {
+        // Save the food item to the database
+        await food.save();
+        res.json({
+            success: true,
+            message: "Food Added Successfully"
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Error saving food item"
+        });
+    }
+};
+
+module.exports = { addFood };
