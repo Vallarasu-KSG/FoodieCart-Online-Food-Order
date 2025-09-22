@@ -7,7 +7,6 @@ const placeOrder = async (req, res) => {
   try {
     const { userId, items, amount, address, paymentMethod, paymentDetails } = req.body;
 
-    // Validate required fields
     if (!userId || !items || !amount || !address || !paymentMethod) {
       return res.status(400).json({
         success: false,
@@ -22,19 +21,18 @@ const placeOrder = async (req, res) => {
       });
     }
 
-    // Create new order
     const newOrder = new OrderModel({
       userId,
       items,
       amount,
       address,
       paymentMethod,
-      paymentDetails, // optional details (upiId, card last4, cashGiven, etc.)
+      paymentDetails,
     });
 
     await newOrder.save();
 
-    // Clear user's cart after order
+    // Clear cart
     await UserModel.findByIdAndUpdate(userId, { cartData: {} });
 
     return res.status(201).json({
@@ -90,7 +88,7 @@ const listOrders = async (req, res) => {
   }
 };
 
-// ================= Update Order Status =================
+// ================= Update Order Status / Cancel =================
 const updateStatus = async (req, res) => {
   try {
     const { orderId, status } = req.body;
@@ -103,11 +101,16 @@ const updateStatus = async (req, res) => {
       return res.json({ success: false, message: "Invalid orderId" });
     }
 
-    const updatedOrder = await OrderModel.findByIdAndUpdate(orderId, { status }, { new: true });
-
-    if (!updatedOrder) {
-      return res.json({ success: false, message: "Order not found" });
+    if (status.toLowerCase() === "cancelled") {
+      // Delete order completely
+      const deletedOrder = await OrderModel.findByIdAndDelete(orderId);
+      if (!deletedOrder) return res.json({ success: false, message: "Order not found" });
+      return res.json({ success: true, message: "Order cancelled and removed" });
     }
+
+    // Update status normally
+    const updatedOrder = await OrderModel.findByIdAndUpdate(orderId, { status }, { new: true });
+    if (!updatedOrder) return res.json({ success: false, message: "Order not found" });
 
     res.json({ success: true, message: "Status updated successfully" });
   } catch (error) {
