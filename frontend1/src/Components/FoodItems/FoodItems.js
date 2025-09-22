@@ -5,21 +5,21 @@ import { StoreContext } from "../../Context/StoreContext";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 
-const FoodItems = ({ id, name, image, price, offerPrice, category, address, initialHot }) => {
+const FoodItems = ({ id, name, image, price, offerPrice, category, address, initialHot = 0 }) => {
   const { cardItem, addToCard, removeFromCard, setCardItem } = useContext(StoreContext);
-  const [hotCount, setHotCount] = useState(initialHot || 0);
-  const [liked, setLiked] = useState(false); // Track if heart is clicked
+  const [hotCount, setHotCount] = useState(initialHot);
+  const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
   const url = "https://food-order-website-backend-final.onrender.com";
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleBuyItem = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     const hiddenSections = document.querySelectorAll(".hidden-section");
     hiddenSections.forEach((section) => section.classList.add("show-section"));
-    setCardItem([]);
+    setCardItem({});
     addToCard(id);
-    Navigate("/buyPage");
+    navigate("/buyPage");
   };
 
   const handleHeartToggle = async () => {
@@ -32,7 +32,11 @@ const FoodItems = ({ id, name, image, price, offerPrice, category, address, init
       const response = await fetch(`${url}/api/hotItem`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ itemId: id, Item: name, hotCount: hotCount + (newLiked ? 1 : -1) }),
+        body: JSON.stringify({
+          itemId: id,
+          Item: name,
+          hotCount: hotCount + (newLiked ? 1 : -1),
+        }),
       });
       if (!response.ok) throw new Error("Failed to submit hot click");
     } catch (error) {
@@ -51,12 +55,12 @@ const FoodItems = ({ id, name, image, price, offerPrice, category, address, init
           alt={`Food_Name${name}`}
           height="180"
         />
-        {!cardItem[id] ? (
+        {!cardItem?.[id] ? (
           <AiOutlinePlus className="add1" onClick={() => addToCard(id)} size={22} />
         ) : (
           <div className="food-item-counter">
             <AiOutlineMinus className="remove-icon" onClick={() => removeFromCard(id)} size={22} />
-            <p>{cardItem[id]}</p>
+            <p>{cardItem?.[id] ?? 0}</p>
             <AiOutlinePlus className="add-icon" onClick={() => addToCard(id)} size={22} />
           </div>
         )}

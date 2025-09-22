@@ -2,50 +2,48 @@ import mongoose from "mongoose";
 import OrderModel from "../models/OrderModel.js";
 import UserModel from "../models/UserModel.js";
 
+// ================= Place Order =================
 const placeOrder = async (req, res) => {
   try {
-    // Validate the incoming request
-    const { userId, items, amount, address } = req.body;
+    const { userId, items, amount, address, paymentMethod, paymentDetails } = req.body;
 
-    if (!userId || !items || !amount || !address) {
-      return res.status(400).json({ 
-        success: false, 
-        message: "Missing required fields: userId, items, amount, or address" 
+    // Validate required fields
+    if (!userId || !items || !amount || !address || !paymentMethod) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required fields: userId, items, amount, address, or paymentMethod",
       });
     }
 
-    // Ensure items array is not empty
     if (!Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ 
-        success: false, 
-        message: "Items array cannot be empty" 
+      return res.status(400).json({
+        success: false,
+        message: "Items array cannot be empty",
       });
     }
 
-    // Create a new order
+    // Create new order
     const newOrder = new OrderModel({
       userId,
       items,
       amount,
       address,
+      paymentMethod,
+      paymentDetails, // optional details (upiId, card last4, cashGiven, etc.)
     });
 
     await newOrder.save();
 
-    // Clearing the user's cart after placing the order
+    // Clear user's cart after order
     await UserModel.findByIdAndUpdate(userId, { cartData: {} });
 
-    // Send a success response
     return res.status(201).json({
       success: true,
       message: "Order placed successfully",
       orderId: newOrder._id,
     });
   } catch (error) {
-    // Improved error handling (including logging the error message)
     console.error("Error placing order:", error);
-
-    // Send a failure response
     return res.status(500).json({
       success: false,
       message: "An error occurred while processing the order",
@@ -54,61 +52,57 @@ const placeOrder = async (req, res) => {
   }
 };
 
+// ================= Verify Order =================
 const verifyOrder = async (req, res) => {
-  const {orderId, success} = req.body;
+  const { orderId, success } = req.body;
   try {
-    if (success=="true") {
-      await OrderModel.findByIdAndUpdate(orderId, {payment:true});
-      res.json({success:true, message:"Paid"})
-    }
-    else {
-      // await OrderModel.findByIdAndDelete(orderId);
-      res.json({success:false, message:"Not Paid"})
+    if (success === "true") {
+      await OrderModel.findByIdAndUpdate(orderId, { payment: true });
+      res.json({ success: true, message: "Paid" });
+    } else {
+      res.json({ success: false, message: "Not Paid" });
     }
   } catch (error) {
-    console.log(error)
-    res.json({success:false, message:"Error"})
+    console.error(error);
+    res.json({ success: false, message: "Error verifying order" });
   }
 };
 
-// users orders for frontend
+// ================= User Orders =================
 const userOrders = async (req, res) => {
   try {
-    const orders = await OrderModel.find({userId:req.body.userId});
-    res.json({success:true, data:orders})
+    const orders = await OrderModel.find({ userId: req.body.userId });
+    res.json({ success: true, data: orders });
   } catch (error) {
-    console.log(error)
-    res.json({success:false, message:"Error"})
+    console.error(error);
+    res.json({ success: false, message: "Error fetching user orders" });
   }
-}
+};
 
-// Listing orders for admin panel
-const listOrdera = async (req, res) => {
+// ================= Admin: List Orders =================
+const listOrders = async (req, res) => {
   try {
     const orders = await OrderModel.find({});
-    res.json({success:true, data:orders})
+    res.json({ success: true, data: orders });
   } catch (error) {
-    console.log(error)
-    res.json({success:false, message:"Error"});
+    console.error(error);
+    res.json({ success: false, message: "Error listing orders" });
   }
-}
+};
 
-// api for updating order status
+// ================= Update Order Status =================
 const updateStatus = async (req, res) => {
   try {
     const { orderId, status } = req.body;
 
-    // Validate orderId and status
     if (!orderId || !status) {
       return res.json({ success: false, message: "orderId and status are required" });
     }
 
-    // Check if the orderId is a valid MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(orderId)) {
       return res.json({ success: false, message: "Invalid orderId" });
     }
 
-    // Update the order status
     const updatedOrder = await OrderModel.findByIdAndUpdate(orderId, { status }, { new: true });
 
     if (!updatedOrder) {
@@ -117,10 +111,9 @@ const updateStatus = async (req, res) => {
 
     res.json({ success: true, message: "Status updated successfully" });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.json({ success: false, message: "Error updating status" });
   }
 };
 
-
-export { placeOrder, verifyOrder, userOrders, listOrdera, updateStatus };
+export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus };
