@@ -13,7 +13,6 @@ const Cart = () => {
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromo, setAppliedPromo] = useState(null);
   const [error, setError] = useState("");
-  // const url = "http://localhost:4001";
   const url = "https://food-order-website-backend-final.onrender.com";
 
   const promoCodes = {

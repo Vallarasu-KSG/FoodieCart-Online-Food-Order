@@ -1,15 +1,15 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import Logo from "../Navbar/Navbar_Logo.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../Context/StoreContext";
 import { AiOutlineUser, AiOutlineShoppingCart, AiOutlineLogout } from "react-icons/ai";
 
 const Navbar = ({ setShowLogin = () => console.warn("setShowLogin is not provided") }) => {
-  const [menu, setMenu] = useState("home");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
+  const location = useLocation(); // detect current path
   const dropdownRef = useRef(null);
 
   const logout = () => {
@@ -20,7 +20,6 @@ const Navbar = ({ setShowLogin = () => console.warn("setShowLogin is not provide
   };
 
   const handleMenuClick = (menuItem) => {
-    setMenu(menuItem);
     window.scrollTo({ top: 0, behavior: "smooth" });
     document.querySelectorAll(".hidden-section").forEach((section) => {
       section.classList.add("show-section");
@@ -30,10 +29,7 @@ const Navbar = ({ setShowLogin = () => console.warn("setShowLogin is not provide
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
       }
     };
@@ -43,6 +39,11 @@ const Navbar = ({ setShowLogin = () => console.warn("setShowLogin is not provide
     };
   }, []);
 
+  // Determine active menu item based on current path
+  const getActiveClass = (path) => {
+    return location.pathname.toLowerCase() === path.toLowerCase() ? "active" : "";
+  };
+
   return (
     <div className="navbar">
       <Link to="/Home" onClick={() => handleMenuClick("home")} className="logo-link">
@@ -51,13 +52,13 @@ const Navbar = ({ setShowLogin = () => console.warn("setShowLogin is not provide
 
       <ul className="navbar-menu">
         <Link to="/Home" onClick={() => handleMenuClick("home")}>
-          <li className={menu === "home" ? "active" : ""}>Home</li>
+          <li className={getActiveClass("/home")}>Home</li>
         </Link>
         <Link to="/FoodMenu" onClick={() => handleMenuClick("FoodMenu")}>
-          <li className={menu === "FoodMenu" ? "active" : ""}>Menu</li>
+          <li className={getActiveClass("/foodmenu")}>Menu</li>
         </Link>
         <Link to="/About" onClick={() => handleMenuClick("About")}>
-          <li className={menu === "About" ? "active" : ""}>About</li>
+          <li className={getActiveClass("/about")}>About</li>
         </Link>
       </ul>
 
@@ -71,10 +72,7 @@ const Navbar = ({ setShowLogin = () => console.warn("setShowLogin is not provide
             Sign In
           </button>
         ) : (
-          <div
-            className="navbar-profile"
-            onClick={() => setDropdownOpen((prev) => !prev)}
-          >
+          <div className="navbar-profile" onClick={() => setDropdownOpen((prev) => !prev)}>
             <AiOutlineUser size={28} color="white" />
             <ul className={`nav-profile-dropdown ${dropdownOpen ? "show" : ""}`}>
               <li
