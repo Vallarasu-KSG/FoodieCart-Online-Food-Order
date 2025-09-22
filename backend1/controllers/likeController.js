@@ -38,15 +38,19 @@ export const toggleLike = async (req, res) => {
 // Get total likes for an item
 export const getLikes = async (req, res) => {
   const { itemId } = req.params;
+  const userId = req.userId; // authMiddleware attaches this
 
   if (!itemId) return res.status(400).json({ message: "Missing itemId" });
 
   try {
     const likeDoc = await Like.findOne({ itemId });
     const totalLikes = likeDoc ? likeDoc.likedBy.length : 0;
-    res.json({ totalLikes });
+    const liked = likeDoc ? likeDoc.likedBy.includes(userId) : false;
+
+    res.json({ totalLikes, liked });
   } catch (error) {
     console.error("Error fetching likes:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
+

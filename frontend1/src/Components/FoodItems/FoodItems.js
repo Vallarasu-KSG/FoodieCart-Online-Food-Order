@@ -10,24 +10,33 @@ const FoodItems = ({ id, name, image, price, offerPrice, category, address }) =>
   const [hotCount, setHotCount] = useState(0);
   const [liked, setLiked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [animate, setAnimate] = useState(false);
   const navigate = useNavigate();
   const url = "https://food-order-website-backend-final.onrender.com";
 
-  // Fetch initial likes
+  // Fetch likes & liked status
   useEffect(() => {
     const fetchLikes = async () => {
+      if (!token) return; // skip if not logged in
       try {
-        const res = await axios.get(`${url}/api/likes/${id}`);
+        const res = await axios.get(`${url}/api/likes/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setHotCount(res.data.totalLikes || 0);
+        setLiked(res.data.liked || false);
       } catch (err) {
         console.error("Failed to fetch likes:", err);
       }
     };
     fetchLikes();
-  }, [id]);
+  }, [id, token]);
 
   const handleHeartToggle = async () => {
-    if (!token) return alert("Please login to like items.");
+    if (!token) {
+      alert("Please login to like items.");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await axios.post(
@@ -35,6 +44,10 @@ const FoodItems = ({ id, name, image, price, offerPrice, category, address }) =>
         { itemId: id, itemName: name },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 300);
+
       setHotCount(res.data.totalLikes || 0);
       setLiked(res.data.liked);
     } catch (err) {
@@ -73,7 +86,7 @@ const FoodItems = ({ id, name, image, price, offerPrice, category, address }) =>
           <p>{name}</p>
           <div className="heart-section" onClick={handleHeartToggle}>
             <AiFillHeart className={`heart-icon ${liked ? "liked" : ""}`} />
-            <span className="heart-count">{hotCount}</span>
+            <span className={`heart-count ${animate ? "animate" : ""}`}>{hotCount}</span>
           </div>
         </div>
         <p className="food-item-price">
