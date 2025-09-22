@@ -135,10 +135,16 @@ const PlaceOrder = () => {
         },
       });
 
+      // inside handleConfirmOrder success block
       if (response.data?.success) {
         setPopup({ visible: true, message: "Order placed successfully!", type: "success" });
         setCardItem([]);
-        setTimeout(() => navigate("/MyOrders"), 2000);
+      
+        // Auto close after 2.5s and redirect
+        setTimeout(() => {
+          setPopup({ visible: false, message: "", type: "" });
+          navigate("/MyOrders");
+        }, 2500);
       } else {
         setPopup({ visible: true, message: response.data?.message || "Failed to place order.", type: "error" });
       }

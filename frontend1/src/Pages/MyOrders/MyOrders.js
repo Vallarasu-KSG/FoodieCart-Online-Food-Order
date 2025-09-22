@@ -85,8 +85,8 @@ const MyOrders = () => {
                 <th>S.No</th>
                 <th>Order</th>
                 <th>Items</th>
+                <th>Item</th>
                 <th>Amount</th>
-                <th>Item Count</th>
                 <th>Payment</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -111,8 +111,8 @@ const MyOrders = () => {
                         : `${name} x ${item.quantity}, `;
                     })}
                   </td>
+                  <td data-label="Item">{order.items.length}</td>
                   <td data-label="Amount">₹{order.amount}</td>
-                  <td data-label="Item Count">{order.items.length}</td>
                   <td data-label="Payment">{order.paymentMethod || "Not Provided"}</td>
                   <td data-label="Status"><b className='status'>{order.status || "Pending"}</b></td>
                   <td data-label="Actions">
