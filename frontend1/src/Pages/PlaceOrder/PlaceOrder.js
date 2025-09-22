@@ -45,7 +45,9 @@ const PlaceOrder = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+
+  // Overlay Popup state
+  const [popup, setPopup] = useState({ visible: false, message: "", type: "" });
 
   // Handle input changes
   const handleInputChange = (e) => {
@@ -85,18 +87,18 @@ const PlaceOrder = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     if (!token) {
-      alert("Please log in to place your order.");
+      setPopup({ visible: true, message: "Please log in to place your order.", type: "error" });
       navigate("/login");
       return;
     }
 
     if (!validateForm()) {
-      alert("Please fill all required fields.");
+      setPopup({ visible: true, message: "Please fill all required fields.", type: "error" });
       return;
     }
 
     if (cartItem.length === 0 || totalAmount === 0) {
-      alert("Your cart is empty.");
+      setPopup({ visible: true, message: "Your cart is empty.", type: "error" });
       navigate("/cart");
       return;
     }
@@ -123,11 +125,8 @@ const PlaceOrder = () => {
           : cashDetails,
     };
 
-    console.log("Sending Order Data:", orderData);
-
     try {
       setIsLoading(true);
-      setError("");
 
       const response = await axios.post(`${url}/api/order/place`, orderData, {
         headers: {
@@ -137,17 +136,14 @@ const PlaceOrder = () => {
       });
 
       if (response.data?.success) {
-        alert("Order placed successfully!");
+        setPopup({ visible: true, message: "Order placed successfully!", type: "success" });
         setCardItem([]);
-        navigate("/MyOrders");
+        setTimeout(() => navigate("/MyOrders"), 2000);
       } else {
-        setError(
-          response.data?.message || "Failed to place order. Please try again."
-        );
+        setPopup({ visible: true, message: response.data?.message || "Failed to place order.", type: "error" });
       }
     } catch (err) {
-      console.error("Place order error:", err.response?.data || err.message);
-      setError("An error occurred. Please try again later.");
+      setPopup({ visible: true, message: "An error occurred. Please try again later.", type: "error" });
     } finally {
       setIsLoading(false);
     }
@@ -160,162 +156,157 @@ const PlaceOrder = () => {
   }, [token, totalAmount, navigate]);
 
   return (
-    <form className="placeOrder" onSubmit={handleConfirmOrder}>
-      <div className="place-Order-Left">
-        <p className="title">Delivery Information</p>
-        {[
-          "firstName",
-          "lastName",
-          "email",
-          "contact",
-          "building",
-          "street",
-          "city",
-          "state",
-          "pinCode",
-          "country",
-        ].map((field) => (
-          <input
-            key={field}
-            type={
-              field === "email"
-                ? "email"
-                : field === "contact" || field === "pinCode"
-                ? "tel"
-                : "text"
-            }
-            name={field}
-            placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-            value={formData[field]}
-            onChange={handleInputChange}
-          />
-        ))}
-      </div>
-
-      <div className="place-Order-Right">
-        <h1>Order Summary</h1>
-        <p>Subtotal: ₹ {subtotal.toFixed(2)}</p>
-        <p>Discount: - ₹ {discount.toFixed(2)}</p>
-        <p>Delivery Fee: ₹ {deliveryFee.toFixed(2)}</p>
-        <p>Tax: ₹ {tax.toFixed(2)}</p>
-        <p className="total">Total Pay: ₹ {totalAmount.toFixed(2)}</p>
-
-        {/* Payment Options */}
-        <div className="payment-container">
-          <h3>Choose Payment Method</h3>
-          <div className="payment-options">
-            <label>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="Cash"
-                checked={paymentMethod === "Cash"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              Cash
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="UPI"
-                checked={paymentMethod === "UPI"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              UPI
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="paymentMethod"
-                value="Card"
-                checked={paymentMethod === "Card"}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-              Card
-            </label>
+    <>
+      {/* Overlay Popup */}
+      {popup.visible && (
+        <div className={`popup-overlay ${popup.type}`}>
+          <div className="popup-box">
+            <p>{popup.message}</p>
+            <button onClick={() => setPopup({ visible: false, message: "", type: "" })}>
+              Close
+            </button>
           </div>
+        </div>
+      )}
 
-          {/* Cash Section */}
-          {paymentMethod === "Cash" && (
-            <div className="cash-section">
-              <input
-                type="number"
-                name="billAmount"
-                value={cashDetails.billAmount}
-                readOnly
-              />
-              <input
-                type="number"
-                name="givenAmount"
-                placeholder="Given Amount"
-                value={cashDetails.givenAmount}
-                onChange={handleCashChange}
-              />
-              <input
-                type="number"
-                name="balance"
-                placeholder="Balance"
-                value={cashDetails.balance}
-                readOnly
-              />
-            </div>
-          )}
-
-          {/* UPI Section */}
-          {paymentMethod === "UPI" && (
-            <div className="upi-section">
-              <input
-                type="text"
-                placeholder="Enter UPI ID"
-                value={upiId}
-                onChange={(e) => setUpiId(e.target.value)}
-              />
-            </div>
-          )}
-
-          {/* Card Section */}
-          {paymentMethod === "Card" && (
-            <div className="card-section">
-              <input
-                type="text"
-                placeholder="Card Number"
-                maxLength="16"
-                value={cardDetails.cardNumber}
-                onChange={(e) =>
-                  setCardDetails({ ...cardDetails, cardNumber: e.target.value })
-                }
-              />
-              <input
-                type="text"
-                placeholder="MM/YY"
-                value={cardDetails.expiry}
-                onChange={(e) =>
-                  setCardDetails({ ...cardDetails, expiry: e.target.value })
-                }
-              />
-              <input
-                type="password"
-                placeholder="CVV"
-                maxLength="3"
-                value={cardDetails.cvv}
-                onChange={(e) =>
-                  setCardDetails({ ...cardDetails, cvv: e.target.value })
-                }
-              />
-            </div>
-          )}
+      <form className="placeOrder" onSubmit={handleConfirmOrder}>
+        <div className="place-Order-Left">
+          <p className="title">Delivery Information</p>
+          {[
+            "firstName",
+            "lastName",
+            "email",
+            "contact",
+            "building",
+            "street",
+            "city",
+            "state",
+            "pinCode",
+            "country",
+          ].map((field) => (
+            <input
+              key={field}
+              type={
+                field === "email"
+                  ? "email"
+                  : field === "contact" || field === "pinCode"
+                  ? "tel"
+                  : "text"
+              }
+              name={field}
+              placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+              value={formData[field]}
+              onChange={handleInputChange}
+            />
+          ))}
         </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        <div className="place-Order-Right">
+          <h1>Order Summary</h1>
+          <p>Subtotal: ₹ {subtotal.toFixed(2)}</p>
+          <p>Discount: - ₹ {discount.toFixed(2)}</p>
+          <p>Delivery Fee: ₹ {deliveryFee.toFixed(2)}</p>
+          <p>Tax: ₹ {tax.toFixed(2)}</p>
+          <p className="total">Total Pay: ₹ {totalAmount.toFixed(2)}</p>
 
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Placing Order..." : "Confirm Order"}
-        </button>
-      </div>
-    </form>
+          {/* Payment Options */}
+          <div className="payment-container">
+            <h3>Choose Payment Method</h3>
+            <div className="payment-options">
+              <label>
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Cash"
+                  checked={paymentMethod === "Cash"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                Cash
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="UPI"
+                  checked={paymentMethod === "UPI"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                UPI
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Card"
+                  checked={paymentMethod === "Card"}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                />
+                Card
+              </label>
+            </div>
+
+            {/* Cash Section */}
+            {paymentMethod === "Cash" && (
+              <div className="cash-section">
+                <input type="number" name="billAmount" value={cashDetails.billAmount} readOnly />
+                <input
+                  type="number"
+                  name="givenAmount"
+                  placeholder="Given Amount"
+                  value={cashDetails.givenAmount}
+                  onChange={handleCashChange}
+                />
+                <input type="number" name="balance" placeholder="Balance" value={cashDetails.balance} readOnly />
+              </div>
+            )}
+
+            {/* UPI Section */}
+            {paymentMethod === "UPI" && (
+              <div className="upi-section">
+                <input
+                  type="text"
+                  placeholder="Enter UPI ID"
+                  value={upiId}
+                  onChange={(e) => setUpiId(e.target.value)}
+                />
+              </div>
+            )}
+
+            {/* Card Section */}
+            {paymentMethod === "Card" && (
+              <div className="card-section">
+                <input
+                  type="text"
+                  placeholder="Card Number"
+                  maxLength="16"
+                  value={cardDetails.cardNumber}
+                  onChange={(e) => setCardDetails({ ...cardDetails, cardNumber: e.target.value })}
+                />
+                <input
+                  type="text"
+                  placeholder="MM/YY"
+                  value={cardDetails.expiry}
+                  onChange={(e) => setCardDetails({ ...cardDetails, expiry: e.target.value })}
+                />
+                <input
+                  type="password"
+                  placeholder="CVV"
+                  maxLength="3"
+                  value={cardDetails.cvv}
+                  onChange={(e) => setCardDetails({ ...cardDetails, cvv: e.target.value })}
+                />
+              </div>
+            )}
+          </div>
+
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Placing Order..." : "Confirm Order"}
+          </button>
+        </div>
+      </form>
+    </>
   );
 };
 

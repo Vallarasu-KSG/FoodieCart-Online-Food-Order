@@ -1,221 +1,301 @@
-/* ===== General Styles ===== */
+/* MyOrders.css - paste this and replace your existing CSS */
+
+/* ===== Page Wrapper ===== */
 .my-orders {
-  padding: 1rem;
-  font-family: Arial, sans-serif;
+  padding: 20px;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
+  background: #fafafa;
+  min-height: 100vh;
+  font-family: "Arial", sans-serif;
 }
 
+/* Title */
 .my-orders h1 {
+  font-size: 24px;
   text-align: center;
-  margin-bottom: 1rem;
-  color: #333;
+  margin-bottom: 18px;
+  color: #222;
+  font-weight: 700;
 }
 
-/* ===== Table Wrapper ===== */
+/* Table wrapper for horizontal scroll on small screens */
 .table-wrapper {
   overflow-x: auto;
+  background: #fff;
+  /* border-radius: 12px; */
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
 }
 
+/* ===== Table (desktop) ===== */
 .orders-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  border-radius: 10px;
-  overflow: hidden;
+  font-size: 14px;
+  min-width: 800px; /* keep columns readable on wide screens */
 }
 
-.orders-table th {
-  padding: 0.8rem 1rem;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-  font-size: 0.9rem;
+.orders-table thead {
+  background: #f5f7fb;
 }
+
+.orders-table th,
 .orders-table td {
-  padding: 0.8rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-  font-size: 0.9rem;
+  padding: 12px 14px;
+  text-align: center;
+  border: 1px solid gray;
+  vertical-align: middle;
+  color: #333;
 }
 
 .orders-table th {
-  background-color: #f4f6f8;
-  color: #333;
-  font-weight: 600;
+  font-weight: 700;
+  color: #2b2b2b;
+  font-size: 13px;
+  letter-spacing: 0.2px;
 }
 
-.orders-table tr:hover {
-  background-color: #f9f9f9;
+.orders-table tr:hover td {
+  background: #fbfdff;
 }
 
-/* ===== Order Image ===== */
+/* Order image */
 .order-img {
-  width: 50px;
-  height: 50px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
-  border-radius: 6px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #f0f2f5;
 }
 
-/* ===== Buttons ===== */
-.track-btn, .cancel-btn {
-    width: 100px;
-    height: 30px;
-  /* margin-right: 0.4rem; */
-  padding: 0.35rem 0.7rem;
-  border: none;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  transition: all 0.3s;
-}
-
-.track-btn {
-  background-color: #4cafef;
-  color: #fff;
-}
-
-.track-btn:hover {
-  background-color: #3a9ddc;
-}
-
-.cancel-btn {
-  background-color: #f44336;
-  color: #fff;
-}
-
-.cancel-btn:hover {
-  background-color: #d32f2f;
-}
-
-/* ===== Status Styling ===== */
+/* Status pill */
 .status {
-  font-weight: 600;
-  color: #555;
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #1f6feb;
+  background: rgba(31,111,235,0.06);
 }
 
-/* ===== Popup Overlay ===== */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
+/* ===== Action Buttons (equal width) ===== */
+.action-btns {
   display: flex;
+  gap: 10px;
   justify-content: center;
   align-items: center;
-  z-index: 100;
 }
 
-.popup-content {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 10px;
-  width: 320px;
-  max-width: 90%;
-  text-align: center;
-}
-
-.popup-content h3 {
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.popup-content button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
+/* Buttons are same size using flex-basis and max-width */
+.track-btn,
+.cancel-btn {
+  flex: 1 1 100px;      /* allow grow/shrink but try to be equal */
+  max-width: 120px;
+  min-width: 80px;
+  height: 36px;
   border: none;
-  background-color: #4cafef;
-  color: #fff;
   border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform .12s ease, box-shadow .12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.popup-content button:hover {
-  background-color: #3a9ddc;
+/* Track button style */
+.track-btn {
+  background: linear-gradient(180deg,#2b8af6,#176fd6);
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(36,111,235,0.12);
+}
+.track-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(36,111,235,0.16); }
+
+/* Cancel button style */
+.cancel-btn {
+  background: linear-gradient(180deg,#f25656,#d43a3a);
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(242,86,86,0.12);
+}
+.cancel-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(212,58,58,0.16); }
+
+/* ===== Popup Overlay & Content ===== */
+.popup-overlay {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2200;
+  padding: 20px;
 }
 
-/* ===== Responsive Design ===== */
+/* popup card */
+.popup-content {
+  width: 100%;
+  max-width: 460px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.12);
+  text-align: left;
+  animation: popupIn .18s ease;
+}
 
-/* Tablets */
+/* header inside popup */
+.popup-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #1f2937;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* body text */
+.popup-content p {
+  margin: 6px 0;
+  color: #334155;
+  font-size: 14px;
+}
+
+/* items list inside popup */
+.popup-items {
+  margin-top: 10px;
+}
+.popup-items ul {
+  padding-left: 18px;
+  margin: 6px 0 0 0;
+  color: #374151;
+}
+.popup-items li {
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+/* popup CTA button */
+.popup-content > button {
+  margin-top: 16px;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(180deg,#2b8af6,#176fd6);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.popup-content > button:hover { opacity: 0.95; transform: translateY(-1px); }
+
+/* Cancel-confirm popup actions row */
+.popup-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+.popup-actions .cancel-btn,
+.popup-actions .track-btn {
+  flex: 1;
+  max-width: none;
+  min-width: 0;
+  height: 40px;
+  font-size: 14px;
+}
+
+/* small helper for bold label in popup */
+.popup-label { font-weight: 700; color: #111827; margin-right: 6px; }
+
+/* popup appear animation */
+@keyframes popupIn {
+  from { transform: scale(.98); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ===== Responsive Adjustments ===== */
+
+/* Medium screens */
 @media (max-width: 992px) {
   .orders-table th, .orders-table td {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 10px 12px;
+    font-size: 13px;
   }
-
-  .order-img {
-    width: 40px;
-    height: 40px;
-  }
-
-  .track-btn, .cancel-btn {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.75rem;
-  }
+  .order-img { width: 48px; height: 48px; }
+  .track-btn, .cancel-btn { height: 34px; font-size: 13px; }
+  .popup-content { max-width: 420px; padding: 18px; }
 }
 
-/* Mobile: Convert table to cards */
+/* Mobile: convert rows into stacked cards for readability */
 @media (max-width: 600px) {
-  .orders-table, .orders-table thead, .orders-table tbody, .orders-table th, .orders-table td, .orders-table tr {
+  .orders-table { border: 0; min-width: 0; }
+  .orders-table thead { display: none; }
+  .orders-table, .orders-table tbody, .orders-table tr, .orders-table td {
     display: block;
     width: 100%;
   }
 
   .orders-table tr {
-    margin-bottom: 1rem;
+    margin-bottom: 14px;
     background: #fff;
-    padding: 0.8rem;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-    border-radius: 10px;
+    /* border-radius: 12px; */
+    box-shadow: 0 6px 18px rgba(15,23,42,0.04);
+    padding: 12px;
+    border: 1px solid gray;
   }
 
-  .orders-table th {
-    display: none;
-  }
-
+  /* each td becomes a labeled row */
   .orders-table td {
-    padding: 0.5rem 0;
+    padding: 8px 0;
     text-align: left;
+    border: 0;
     position: relative;
-    padding-left: 50%;
-    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .orders-table td::before {
-    position: absolute;
-    left: 0.8rem;
-    width: 45%;
-    white-space: nowrap;
-    font-weight: 600;
-    color: #555;
+    content: attr(data-label);
+    width: 110px;
+    color: #374151;
+    font-weight: 700;
+    flex: 0 0 110px;
+    font-size: 13px;
   }
 
-  .orders-table td:nth-of-type(1)::before { content: "S No"; }
-  .orders-table td:nth-of-type(2)::before { content: "Order"; }
-  .orders-table td:nth-of-type(3)::before { content: "Items"; }
-  .orders-table td:nth-of-type(4)::before { content: "Amount"; }
-  .orders-table td:nth-of-type(5)::before { content: "Item Count"; }
-  .orders-table td:nth-of-type(6)::before { content: "Payment"; }
-  .orders-table td:nth-of-type(7)::before { content: "Status"; }
-  .orders-table td:nth-of-type(8)::before { content: "Actions"; }
-
-  .order-img {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 0.5rem;
+  /* image cell styling */
+  .order-img { 
+    width: 48px; 
+    height: 48px; 
+    flex: 0 0 48px; 
   }
 
+  /* wrap actions full width and stack buttons vertically if needed */
+  .action-btns {
+    flex-direction: row;
+    gap: 10px;
+  }
   .track-btn, .cancel-btn {
-    width: 60px;
-    height: 30px;
-    margin-bottom: 0;
-    margin-right: 10px;
-    /* margin-top: 0.3rem; */
-    padding: 0.3rem 0.5rem;
-    font-size: 0.7rem;
+    /* flex: 1; */
+    /* max-width: none; */
+    /* min-width: 0; */
+    height: 36px;
+    font-size: 12px;
   }
+
+  /* popup adjustments */
+  .popup-content { width: 94%; max-width: 400px; padding: 16px; }
+  .popup-actions .cancel-btn, .popup-actions .track-btn { height: 36px; font-size: 13px; }
+}
+
+/* utility: visually hidden for accessibility if needed */
+.sr-only {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
 }

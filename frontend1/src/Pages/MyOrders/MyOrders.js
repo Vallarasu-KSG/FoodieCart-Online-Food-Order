@@ -10,6 +10,7 @@ const MyOrders = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [popupOrder, setPopupOrder] = useState(null);
+  const [cancelOrder, setCancelOrder] = useState(null); // separate cancel popup
 
   const extractUserIdFromToken = (token) => {
     try {
@@ -50,9 +51,7 @@ const MyOrders = () => {
 
   useEffect(() => { fetchOrders(); }, [fetchOrders]);
 
-  const handleCancel = async (orderId) => {
-    if (!window.confirm("Are you sure you want to cancel this order?")) return;
-
+  const handleCancelConfirm = async (orderId) => {
     try {
       const response = await axios.post(
         `${url}/api/order/status`,
@@ -61,8 +60,8 @@ const MyOrders = () => {
       );
 
       if (response.data.success) {
-        alert("Order cancelled successfully!");
         setOrders(prev => prev.filter(order => order._id !== orderId));
+        setCancelOrder(null);
       } else {
         alert(response.data.message || "Failed to cancel order.");
       }
@@ -87,7 +86,7 @@ const MyOrders = () => {
                 <th>Order</th>
                 <th>Items</th>
                 <th>Amount</th>
-                <th>Item</th>
+                <th>Item Count</th>
                 <th>Payment</th>
                 <th>Status</th>
                 <th>Actions</th>
@@ -100,19 +99,27 @@ const MyOrders = () => {
                 </tr>
               ) : orders.map((order, idx) => (
                 <tr key={order._id}>
-                  <td>{idx + 1}</td>
-                  <td><img src={parcel} alt="Parcel" className="order-img" /></td>
-                  <td>{order.items.map((item, i) => {
-                    const name = item.name || item.productName || item.id || "Unknown Item";
-                    return i === order.items.length - 1 ? `${name} x ${item.quantity}` : `${name} x ${item.quantity}, `;
-                  })}</td>
-                  <td>₹{order.amount}</td>
-                  <td>{order.items.length}</td>
-                  <td>{order.paymentMethod || "Not Provided"}</td>
-                  <td><b className='status'>{order.status || "Pending"}</b></td>
-                  <td>
-                    <button className="track-btn" onClick={() => setPopupOrder(order)}>Track</button>
-                    <button className="cancel-btn" onClick={() => handleCancel(order._id)}>Cancel</button>
+                  <td data-label="S.No">{idx + 1}</td>
+                  <td data-label="Order">
+                    <img src={parcel} alt="Parcel" className="order-img" />
+                  </td>
+                  <td data-label="Items">
+                    {order.items.map((item, i) => {
+                      const name = item.name || item.productName || item.id || "Unknown Item";
+                      return i === order.items.length - 1
+                        ? `${name} x ${item.quantity}`
+                        : `${name} x ${item.quantity}, `;
+                    })}
+                  </td>
+                  <td data-label="Amount">₹{order.amount}</td>
+                  <td data-label="Item Count">{order.items.length}</td>
+                  <td data-label="Payment">{order.paymentMethod || "Not Provided"}</td>
+                  <td data-label="Status"><b className='status'>{order.status || "Pending"}</b></td>
+                  <td data-label="Actions">
+                    <div className="action-btns">
+                      <button className="track-btn" onClick={() => setPopupOrder(order)}>Track</button>
+                      <button className="cancel-btn" onClick={() => setCancelOrder(order)}>Cancel</button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -121,13 +128,28 @@ const MyOrders = () => {
         </div>
       )}
 
+      {/* Track popup */}
       {popupOrder && (
         <div className="popup-overlay" onClick={() => setPopupOrder(null)}>
           <div className="popup-content" onClick={e => e.stopPropagation()}>
             <h3>Order Status</h3>
-            <p><b>Order ID:</b> {popupOrder._id}</p>
-            <p><b>Status:</b> {popupOrder.status}</p>
+            <p><span className="popup-label">Order ID:</span> {popupOrder._id}</p>
+            <p><span className="popup-label">Status:</span> {popupOrder.status}</p>
             <button onClick={() => setPopupOrder(null)}>Close</button>
+          </div>
+        </div>
+      )}
+
+      {/* Cancel confirm popup */}
+      {cancelOrder && (
+        <div className="popup-overlay" onClick={() => setCancelOrder(null)}>
+          <div className="popup-content" onClick={e => e.stopPropagation()}>
+            <h3>Cancel Order</h3>
+            <p>Are you sure you want to cancel order <b>{cancelOrder._id}</b>?</p>
+            <div className="popup-actions">
+              <button className="cancel-btn" onClick={() => handleCancelConfirm(cancelOrder._id)}>Yes, Cancel</button>
+              <button className="track-btn" onClick={() => setCancelOrder(null)}>No, Go Back</button>
+            </div>
           </div>
         </div>
       )}
