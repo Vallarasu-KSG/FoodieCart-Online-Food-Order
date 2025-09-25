@@ -189,7 +189,7 @@
     .navbar-menu {
         left: 50%;
         transform: translateX(-50%);
-        height: 30px;
+        height: 40px;
         width: 220px;
         gap: 0;
         border-top-left-radius: 20px;
@@ -197,7 +197,7 @@
     }
     .navbar-menu li { font-size: 14px; padding: 0; }
     .logo { width: 110px; height: 30px; }
-    .navbar-profile { width: 30px; height: 30px; }
-    .nav-profile-dropdown { top: 35px; min-width: 120px; }
+    .navbar-profile { width: 30px; height: 45px; }
+    .nav-profile-dropdown { top: 50px; min-width: 120px; }
     .nav-profile-dropdown li { padding: 8px 10px; }
 }
