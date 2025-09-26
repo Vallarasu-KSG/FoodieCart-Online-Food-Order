@@ -38,6 +38,17 @@ function Sidebar({ collapsed }) {
         {!collapsed && <div className="sidebar-text">Welcome, Admin!</div>}
 
         <div className="admin-sidebar-options">
+
+          <NavLink 
+            to="/home1" 
+            className="admin-sidebar-option" 
+            data-label="Home"
+            onClick={() => setIsOpen(false)}
+          >
+            <img src={assets.add_icon} alt="Home" />
+            {!collapsed && <p>Home</p>}
+          </NavLink>
+
           <NavLink 
             to="/add" 
             className="admin-sidebar-option" 
