@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import './ContactPage.css'; // Importing the CSS file
+import './ContactPage.css';
 
 const ContactPage = () => {
-
-  // const url = "https://food-order-website-backend1.onrender.com";
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,14 +15,10 @@ const ContactPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const url = "";
     try {
       const response = await fetch(`https://food-order-website-backend-final.onrender.com/api/contact`, {
-      // const response = await fetch("https://food-order-website-backend1.onrender.com/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: {"Content-Type": "application/json",},
         body: JSON.stringify(formData),
       });
 

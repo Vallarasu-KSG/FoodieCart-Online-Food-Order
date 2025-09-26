@@ -2,9 +2,7 @@ import React from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 import linkedin from '../../assets/Logo/linkedin_logo.png'
-// import instagram from '../../assets/Logo/instagram_logo_icon.png'
 import github from '../../assets/Logo/github_icon.png'
-// import { Link } from "react-router-dom";
 import portfolia from '../../assets/Logo/portfolia.png'
 
 
@@ -73,7 +71,7 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="footer-bottom">
-        <p>&copy; 2024 Food Order App @Creator By Vallarau. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Food Order Platform. All rights reserved.</p>
       </div>
     </footer>
   );

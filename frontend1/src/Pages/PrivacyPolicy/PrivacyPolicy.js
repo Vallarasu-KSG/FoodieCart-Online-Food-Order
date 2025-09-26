@@ -79,10 +79,6 @@ const PrivacyPolicy = () => {
           <li>Phone: +1-234-567-890</li>
         </ul>
       </section>
-
-      <footer>
-        <p>© {new Date().getFullYear()} Food Order Platform. All rights reserved.</p>
-      </footer>
     </div>
   );
 };

@@ -1,177 +1,133 @@
-/* Base Styling */
+/* General Cart Styling */
 .cart {
-  /* margin-top: 0px; */
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.cart .title
-{
-  color: tomato;
-  font-weight: 600;
-  font-size: 22px;
-  margin-bottom: 10px;
+
+.cart .title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
 }
+
+/* Table Styling */
 .cart-items {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
 }
 
-.cart-items th, .cart-items td {
-  border: 1px solid #b4afaf;
-  padding: 10px;
+.cart-items th,
+.cart-items td {
+  padding: 12px 10px;
   text-align: center;
-  vertical-align: middle;
+  font-size: 14px;
+  border: 1px solid #ddd;
 }
 
 .cart-items th {
-  background-color: #f8f8f8;
-  font-weight: bold;
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+
+.cart-items td {
+  background-color: #fff;
 }
 
 .cart-items img {
-  width: 50px;
-  height: auto;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
   border-radius: 5px;
 }
 
-.cart-items-item {
-  background-color: #ffffff;
-}
-
-.cart-items-item:hover {
-  background-color: #f9f9f9;
-}
-
-.cart svg {
+/* Remove icon hover */
+.cart-items svg {
   cursor: pointer;
+  fill: #ff4d4f;
+  transition: transform 0.2s, fill 0.2s;
 }
 
-.cart-bottom {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  gap: 20px;
+.cart-items svg:hover {
+  transform: scale(1.2);
+  fill: #d9363e;
 }
 
-.cart-promocode {
-  flex: 1;
-  background-color: #f8f8f8;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid #e0e0e0;
-}
-
-
-.cart-promocode-input {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.cart-promocode-input input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.cart-promocode-input button {
-  padding: 10px 15px;
+/* Checkout Button */
+.cart-items button {
+  background-color: #1e90ff;
+  color: white;
   border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
-.cart-promocode-input button:hover {
-  background-color: #0056b3;
+.cart-items button:hover {
+  background-color: #0b70d4;
+  transform: scale(1.05);
 }
 
-.promo-code-sti
-{
-  margin-top: 20px;
-  /* display: block; */
-  /* gap: 20px; */
-}
-
-
-.hidden-section {
-  display: none;
-}
-
-.show-section {
-  display: block;
-}
-
-
-
-.cart-total {
-  flex: 1;
+/* Total Row */
+.cart-total-row td {
+  font-weight: bold;
+  font-size: 16px;
   background-color: #f8f8f8;
-  padding: 20px;
-  border-radius: 5px;
-  border: 1px solid #e0e0e0;
 }
 
-.cart-total h2 {
-  margin-bottom: 20px;
+/* Responsive Styling */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .cart-items img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .cart-items th,
+  .cart-items td {
+    padding: 10px 6px;
+    font-size: 13px;
+  }
+
+  .cart-items button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
 }
 
-.cart-total p {
-  margin: 5px 0;
-  font-size: 16px;
-}
-
-.cart-total button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #28a745;
-  color: #ffffff;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.cart-total button:hover {
-  background-color: #218838;
-}
-
-/* Responsive Design */
+/* Mobile */
 @media (max-width: 768px) {
-  .cart-items th, .cart-items td {
-    font-size: 14px;
-    padding: 8px;
+  .cart-items {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
-  .cart-bottom {
-    flex-direction: column;
+  .cart-items tr {
+    display: table-row;
   }
 
-  .cart-total,
-  .cart-promocode {
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .cart {
-    padding: 10px;
+  .cart-items th,
+  .cart-items td {
+    min-width: 120px;
   }
 
-  .cart-items th, .cart-items td {
-    font-size: 12px;
-    padding: 5px;
+  .cart-items img {
+    width: 50px;
+    height: 50px;
   }
 
-  .cart-promocode-input input {
+  .cart-items button {
+    padding: 5px 10px;
     font-size: 12px;
   }
 
-  .cart-promocode-input button,
-  .cart-total button {
-    font-size: 14px;
+  .cart-total-row td {
+    min-width: auto;
   }
 }
