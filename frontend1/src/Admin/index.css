@@ -16,9 +16,9 @@ a
   color: inherit;
 }
 
-.app-content {
+/* .app-content {
   display: grid;
   grid-template-columns: 20% 80%;
   height: 89vh;
   overflow: hidden;
- }
+ } */

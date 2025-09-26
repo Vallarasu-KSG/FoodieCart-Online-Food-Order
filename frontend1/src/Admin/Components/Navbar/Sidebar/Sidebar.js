@@ -1,27 +1,86 @@
-import React from 'react'
-import './Sidebar.css'
-import { assets } from '../../../assets/assets'
-import { NavLink } from 'react-router-dom'
+import React, { useContext, useState } from 'react';
+import './Sidebar.css';
+import { assets } from '../../../assets/assets';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { StoreContext } from '../../../../Context/StoreContext';
+import LogoutIcon from '../../../assets/icon/Logout_icon.png';
 
-function Sidebar() {
+function Sidebar({ collapsed }) {
+  const { setToken } = useContext(StoreContext);
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false); // toggle sidebar
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate('/');
+  };
+
   return (
-    <div className='admin-sidebar'>
-        <div className="admin-sidebar-options">
-            <NavLink to={'/add'} className="admin-sidebar-option">
-                <h6><img src={assets.add_icon} alt="" /></h6>
-                <p>Add Items</p>
-            </NavLink>
-            <NavLink to={'/list'} className="admin-sidebar-option">
-                <img src={assets.list_icon} alt="" />
-                <p>List Items</p>
-            </NavLink>
-            <NavLink to={'./orders'} className="admin-sidebar-option">
-                <img src={assets.order_details_icon} alt="" />
-                <p>Orders</p>
-            </NavLink>
+    <>
+      {/* TOP NAVBAR */}
+      <div className="top-navbar">
+        <div className="top-logo">
+          <img src={assets.logo} alt="Logo" />
         </div>
-    </div>
-  )
+        <button className="hamburger-btn" onClick={() => setIsOpen(!isOpen)}>
+          ☰
+        </button>
+      </div>
+
+      {/* SIDEBAR */}
+      <div className={`admin-sidebar ${collapsed ? "collapsed" : ""} ${isOpen ? "open" : ""}`}>
+        {/* <div className="logo-img-container desktop-only">
+          <img src={assets.logo} alt="Company Logo" />
+        </div> */}
+
+        {/* Extra text above options */}
+        {!collapsed && <div className="sidebar-text">Welcome, Admin!</div>}
+
+        <div className="admin-sidebar-options">
+          <NavLink 
+            to="/add" 
+            className="admin-sidebar-option" 
+            data-label="Add Items"
+            onClick={() => setIsOpen(false)}
+          >
+            <img src={assets.add_icon} alt="Add Items" />
+            {!collapsed && <p>Add Items</p>}
+          </NavLink>
+
+          <NavLink 
+            to="/list" 
+            className="admin-sidebar-option" 
+            data-label="List Items"
+            onClick={() => setIsOpen(false)}
+          >
+            <img src={assets.list_icon} alt="List Items" />
+            {!collapsed && <p>List Items</p>}
+          </NavLink>
+
+          <NavLink 
+            to="/orders" 
+            className="admin-sidebar-option" 
+            data-label="Orders"
+            onClick={() => setIsOpen(false)}
+          >
+            <img src={assets.order_details_icon} alt="Orders" />
+            {!collapsed && <p>Orders</p>}
+          </NavLink>
+        </div>
+
+        <div className="logout-btn-container">
+          <button className="logout-btn" onClick={handleLogout}>
+            <img src={LogoutIcon} alt="Logout Icon" />
+            {!collapsed && <span>Logout</span>}
+          </button>
+        </div>
+      </div>
+
+      {/* OVERLAY */}
+      {isOpen && <div className="sidebar-overlay show" onClick={() => setIsOpen(false)}></div>}
+    </>
+  );
 }
 
-export default Sidebar
+export default Sidebar;

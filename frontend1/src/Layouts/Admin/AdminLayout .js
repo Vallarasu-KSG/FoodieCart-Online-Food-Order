@@ -1,23 +1,23 @@
 // AdminLayout.js
 import React from 'react';
-import './AdminLayout.css'
-import Navbar from '../../Admin/Components/Navbar/Navbar';
+import './AdminLayout.css';
 import Sidebar from '../../Admin/Components/Navbar/Sidebar/Sidebar';
-import { Outlet } from 'react-router-dom'; // Allows nested routing
+import { Outlet } from 'react-router-dom';
 
 const AdminLayout = () => {
+
   return (
-    <>
-    <Navbar/>
-        <div className="admin-content">
+    <div className={`admin-content`}>
+      {/* Sidebar */}
       <div className="sidebar">
-        <Sidebar />
+        <Sidebar  />
       </div>
+
+      {/* Main Content */}
       <div className="s">
-        <Outlet /> This is where admin routes will be rendered
+        <Outlet />
       </div>
     </div>
-    </>
   );
 };
 
