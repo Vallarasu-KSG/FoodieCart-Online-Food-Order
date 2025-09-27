@@ -3,7 +3,7 @@ import './Sidebar.css';
 import { assets } from '../../../assets/assets';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../../../Context/StoreContext';
-import LogoutIcon from '../../../assets/icon/Logout_icon.png';
+import { FaHome, FaPlus, FaList, FaShoppingBag, FaPhone, FaSignOutAlt } from "react-icons/fa"; // react-icons import
 
 function Sidebar({ collapsed }) {
   const { setToken } = useContext(StoreContext);
@@ -30,11 +30,7 @@ function Sidebar({ collapsed }) {
 
       {/* SIDEBAR */}
       <div className={`admin-sidebar ${collapsed ? "collapsed" : ""} ${isOpen ? "open" : ""}`}>
-        {/* <div className="logo-img-container desktop-only">
-          <img src={assets.logo} alt="Company Logo" />
-        </div> */}
 
-        {/* Extra text above options */}
         {!collapsed && <div className="sidebar-text">Welcome, Admin!</div>}
 
         <div className="admin-sidebar-options">
@@ -45,7 +41,7 @@ function Sidebar({ collapsed }) {
             data-label="Home"
             onClick={() => setIsOpen(false)}
           >
-            <img src={assets.add_icon} alt="Home" />
+            <FaHome className="sidebar-icon" />
             {!collapsed && <p>Home</p>}
           </NavLink>
 
@@ -55,7 +51,7 @@ function Sidebar({ collapsed }) {
             data-label="Add Items"
             onClick={() => setIsOpen(false)}
           >
-            <img src={assets.add_icon} alt="Add Items" />
+            <FaPlus className="sidebar-icon" />
             {!collapsed && <p>Add Items</p>}
           </NavLink>
 
@@ -65,7 +61,7 @@ function Sidebar({ collapsed }) {
             data-label="List Items"
             onClick={() => setIsOpen(false)}
           >
-            <img src={assets.list_icon} alt="List Items" />
+            <FaList className="sidebar-icon" />
             {!collapsed && <p>List Items</p>}
           </NavLink>
 
@@ -75,23 +71,24 @@ function Sidebar({ collapsed }) {
             data-label="Orders"
             onClick={() => setIsOpen(false)}
           >
-            <img src={assets.order_details_icon} alt="Orders" />
+            <FaShoppingBag className="sidebar-icon" />
             {!collapsed && <p>Orders</p>}
           </NavLink>
+
           <NavLink 
             to="/admincontact" 
             className="admin-sidebar-option" 
-            data-label="admincontact"
+            data-label="Contact"
             onClick={() => setIsOpen(false)}
           >
-            <img src={assets.order_details_icon} alt="admincontact" />
+            <FaPhone className="sidebar-icon" />
             {!collapsed && <p>Contact</p>}
           </NavLink>
         </div>
 
         <div className="logout-btn-container">
           <button className="logout-btn" onClick={handleLogout}>
-            <img src={LogoutIcon} alt="Logout Icon" />
+            <FaSignOutAlt className="sidebar-icon" />
             {!collapsed && <span>Logout</span>}
           </button>
         </div>

@@ -12,7 +12,13 @@ const Contact = () => {
         "https://food-order-website-backend-final.onrender.com/api/contact"
       );
       const data = await response.json();
-      setContacts(data);
+
+      // Sort (latest first → oldest last)
+      const sortedData = data.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+
+      setContacts(sortedData);
     } catch (error) {
       console.error("Error fetching contacts:", error);
     }
@@ -57,7 +63,6 @@ const Contact = () => {
 
       const result = await response.json();
       if (response.ok) {
-        alert(result.message);
         setContacts(contacts.filter((c) => c._id !== id));
       } else {
         alert(result.error);
@@ -77,12 +82,12 @@ const Contact = () => {
 
   return (
     <div className="contact-container">
-      <h1 className="page-title">📩 Contact Submissions</h1>
+      <h1 className="page-title">Contact Submissions</h1>
 
-      {/* Search box */}
+      {/* Search */}
       <input
         type="text"
-        placeholder="🔍 Search by name or email..."
+        placeholder="Search by name or email..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="search-box"
@@ -94,7 +99,7 @@ const Contact = () => {
         <div className="contact-grid">
           {filteredContacts.map((contact) => (
             <div key={contact._id} className="contact-card">
-              {/* Date/Time on top */}
+              {/* Date/Time at top */}
               <p className="date">
                 {new Date(contact.date).toLocaleString("en-IN", {
                   dateStyle: "medium",
@@ -106,12 +111,10 @@ const Contact = () => {
               <p><strong>Email:</strong> {contact.email}</p>
               <p className="message">“{contact.message}”</p>
 
-              {/* Status Badge */}
               <p className={`status-badge ${contact.read ? "read" : "unread"}`}>
                 {contact.read ? "✅ Read" : "📌 Unread"}
               </p>
 
-              {/* Buttons */}
               <div className="btn-group">
                 <button
                   onClick={() => handleToggleRead(contact._id)}

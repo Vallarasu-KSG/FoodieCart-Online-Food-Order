@@ -1,6 +1,6 @@
 /* General Page */
 .admin-home {
-    margin-top: 10vh;
+  margin-top: 10vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f6f8;
   min-height: 100vh;
@@ -24,7 +24,7 @@
 
 .stat-card {
   flex: 1;
-  min-width: 200px;
+  min-width: 220px;
   background-color: #fff;
   padding: 25px 20px;
   border-radius: 12px;
@@ -34,7 +34,7 @@
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .stat-card h2 {
@@ -72,6 +72,7 @@ th, td {
   text-align: left;
   padding: 12px 15px;
   border-bottom: 1px solid #eee;
+  white-space: nowrap;
 }
 
 th {
@@ -94,13 +95,63 @@ tr:hover {
   color: #555;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .stats {
-    flex-direction: column;
-  }
+/* Responsive Design */
 
+/* Tablet */
+@media (max-width: 1024px) {
+  .admin-main {
+    padding: 15px 20px;
+  }
+  .stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .stat-card {
+    flex: 1 1 45%;
+    margin-bottom: 15px;
+  }
   table {
     min-width: 100%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .admin-main {
+    padding: 10px 15px;
+  }
+  .stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .stat-card {
+    flex: 1 1 100%;
+  }
+  .table-container {
+    padding: 10px;
+  }
+  th, td {
+    padding: 10px;
+    font-size: 14px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .stat-card h2 {
+    font-size: 22px;
+  }
+  .stat-card p {
+    font-size: 14px;
+  }
+  th, td {
+    font-size: 12px;
+    padding: 8px;
+  }
+  .recent-orders h2 {
+    font-size: 16px;
   }
 }

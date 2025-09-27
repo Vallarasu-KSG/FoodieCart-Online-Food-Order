@@ -1,13 +1,11 @@
-/* ===== Container ===== */
 .contact-container {
   max-width: 1200px;
-  margin: auto;
+  margin: 10vh auto auto auto;
   padding: 20px;
   font-family: "Poppins", sans-serif;
   text-align: center;
 }
 
-/* ===== Title ===== */
 .page-title {
   font-size: 2.2rem;
   font-weight: 600;
@@ -16,7 +14,6 @@
   animation: fadeInDown 0.8s ease-in-out;
 }
 
-/* ===== Search Box ===== */
 .search-box {
   width: 100%;
   max-width: 400px;
@@ -25,7 +22,6 @@
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 16px;
-  transition: all 0.3s ease;
 }
 
 .search-box:focus {
@@ -34,23 +30,33 @@
   outline: none;
 }
 
-/* ===== Grid Layout ===== */
+.date-group {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.group-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 15px;
+  border-left: 5px solid #0077ff;
+  padding-left: 10px;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
-  animation: fadeIn 1s ease-in-out;
 }
 
-/* ===== Card Design ===== */
 .contact-card {
   background: #fff;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: 0.3s;
   text-align: left;
-  animation: slideUp 0.8s ease forwards;
 }
 
 .contact-card:hover {
@@ -58,7 +64,6 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== Date Top ===== */
 .contact-card .date {
   font-size: 0.9rem;
   font-weight: 500;
@@ -68,21 +73,18 @@
   padding-bottom: 5px;
 }
 
-/* ===== Name ===== */
 .contact-card h3 {
   margin: 0 0 8px;
   color: #0077ff;
   font-size: 1.3rem;
 }
 
-/* ===== Message ===== */
-.contact-card .message {
+.message {
   font-style: italic;
   margin: 10px 0;
   color: #444;
 }
 
-/* ===== Status Badge ===== */
 .status-badge {
   display: inline-block;
   padding: 4px 10px;
@@ -91,7 +93,6 @@
   font-weight: 500;
   margin: 5px 0;
   color: white;
-  transition: 0.3s ease;
 }
 
 .status-badge.read {
@@ -102,7 +103,6 @@
   background-color: #e63946;
 }
 
-/* ===== Buttons ===== */
 .btn-group {
   display: flex;
   gap: 10px;
@@ -117,12 +117,10 @@
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.85rem;
-  transition: all 0.3s ease;
 }
 
 .toggle-read-btn:hover {
   background: #e76f51;
-  transform: scale(1.05);
 }
 
 .delete-btn {
@@ -132,39 +130,19 @@
   padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .delete-btn:hover {
   background: #d62828;
-  transform: scale(1.05);
 }
 
-/* ===== No Data ===== */
 .no-data {
   font-size: 1.1rem;
   color: #666;
   margin-top: 30px;
-  animation: fadeIn 1s ease-in-out;
 }
 
-/* ===== Animations ===== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ===== Responsive ===== */
+/* Responsive */
 @media (max-width: 768px) {
   .page-title { font-size: 1.8rem; }
   .search-box { width: 90%; }

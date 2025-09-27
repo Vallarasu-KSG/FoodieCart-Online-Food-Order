@@ -81,9 +81,9 @@ const OnlineFoodOrderAdminHome = () => {
 
       </main>
 
-      <footer className="admin-footer">
+      {/* <footer className="admin-footer">
         <p>&copy; 2025 Food Order Admin. All rights reserved.</p>
-      </footer>
+      </footer> */}
     </div>
   );
 };
