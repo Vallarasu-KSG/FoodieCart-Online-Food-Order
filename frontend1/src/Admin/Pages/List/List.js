@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './List.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { assets } from '../../assets/assets';
 import { AiFillHeart } from "react-icons/ai";
+import { StoreContext } from '../../../Context/StoreContext'; // assuming admin token is stored here
 
 const List = () => {
   const url = "https://food-order-website-backend-final.onrender.com";
+  const { token } = useContext(StoreContext); // admin login token
   const [list, setList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState('');
@@ -33,10 +35,14 @@ const List = () => {
 
   // Fetch likes for all items concurrently
   const fetchLikesForAll = async (items) => {
+    if (!token) return; // skip if no token
     try {
       const promises = items.map(item =>
-        axios.get(`${url}/likes/${item._id}`).catch(() => ({ data: { totalLikes: 0, likedUsers: [] } }))
+        axios.get(`${url}/likes/${item._id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        }).catch(() => ({ data: { totalLikes: 0, likedUsers: [] } }))
       );
+
       const resultsArray = await Promise.all(promises);
 
       const results = {};
