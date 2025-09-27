@@ -23,6 +23,7 @@ import List from './Admin/Pages/List/List';
 import Orders from './Admin/Pages/Orders/Orders';
 import LoginPopup from './Components/LoginPopup/LoginPopup';
 import { ToastContainer } from 'react-toastify';
+import Contact from './Admin/Pages/Contact/Contact';
 
 
 function App() {
@@ -52,10 +53,11 @@ function App() {
 
           {/* Admin Routes */}
           <Route element={<AdminLayout />}>
-            <Route path="/home1" element={<Home1 />} />
-            <Route path="/add" element={<Add />} />
-            <Route path="/list" element={<List />} />
-            <Route path="/orders" element={<Orders />} />
+            <Route path="/home1" element={<Home1 />}/>
+            <Route path="/add" element={<Add />}/>
+            <Route path="/list" element={<List />}/>
+            <Route path="/orders" element={<Orders />}/>
+            <Route path="/admincontact" element={<Contact/>}/>
           </Route>
         </Routes>
       </div>

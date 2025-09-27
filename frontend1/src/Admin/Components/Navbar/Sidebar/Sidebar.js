@@ -78,6 +78,15 @@ function Sidebar({ collapsed }) {
             <img src={assets.order_details_icon} alt="Orders" />
             {!collapsed && <p>Orders</p>}
           </NavLink>
+          <NavLink 
+            to="/admincontact" 
+            className="admin-sidebar-option" 
+            data-label="admincontact"
+            onClick={() => setIsOpen(false)}
+          >
+            <img src={assets.order_details_icon} alt="admincontact" />
+            {!collapsed && <p>Contact</p>}
+          </NavLink>
         </div>
 
         <div className="logout-btn-container">
