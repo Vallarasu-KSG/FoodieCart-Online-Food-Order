@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import "./Contact.css";
 
 const Contact = () => {
   const [contacts, setContacts] = useState([]);
+  const [search, setSearch] = useState("");
 
   // Fetch all contacts
   const fetchContacts = async () => {
@@ -27,16 +29,13 @@ const Contact = () => {
     try {
       const response = await fetch(
         `https://food-order-website-backend-final.onrender.com/api/contact/${id}`,
-        {
-          method: "DELETE",
-        }
+        { method: "DELETE" }
       );
 
       const result = await response.json();
 
       if (response.ok) {
         alert(result.message);
-        // Remove from UI without reload
         setContacts(contacts.filter((contact) => contact._id !== id));
       } else {
         alert(result.error);
@@ -47,41 +46,89 @@ const Contact = () => {
     }
   };
 
+  // Handle Toggle Read/Unread
+  const handleToggleRead = async (id) => {
+    try {
+      const response = await fetch(
+        `https://food-order-website-backend-final.onrender.com/api/contact/${id}/read`,
+        { method: "PATCH" }
+      );
+
+      const result = await response.json();
+      if (response.ok) {
+        setContacts(
+          contacts.map((c) =>
+            c._id === id ? { ...c, read: result.read } : c
+          )
+        );
+      } else {
+        alert(result.error);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to toggle read/unread");
+    }
+  };
+
+  // Filter contacts by search
+  const filteredContacts = contacts.filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(search.toLowerCase()) ||
+      contact.email.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div className="contact-list">
-      <h1>Contact Submissions</h1>
-      {contacts.length === 0 ? (
-        <p>No contact messages yet.</p>
+    <div className="contact-container">
+      <h1 className="page-title">📩 Contact Submissions</h1>
+
+      {/* Search box */}
+      <input
+        type="text"
+        placeholder="🔍 Search by name or email..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="search-box"
+      />
+
+      {filteredContacts.length === 0 ? (
+        <p className="no-data">No contact messages found.</p>
       ) : (
-        <ul>
-          {contacts.map((contact) => (
-            <li key={contact._id} className="contact-item">
-              <p>
-                <strong>Name:</strong> {contact.name}
-              </p>
-              <p>
-                <strong>Email:</strong> {contact.email}
-              </p>
-              <p>
-                <strong>Message:</strong> {contact.message}
-              </p>
-              <p>
-                <em>Date:</em>{" "}
+        <div className="contact-grid">
+          {filteredContacts.map((contact) => (
+            <div key={contact._id} className="contact-card">
+              <h3>{contact.name}</h3>
+              <p><strong>Email:</strong> {contact.email}</p>
+              <p className="message">“{contact.message}”</p>
+              <p className="date">
                 {new Date(contact.date).toLocaleString("en-IN", {
                   dateStyle: "medium",
                   timeStyle: "short",
                 })}
               </p>
-              <button
-                onClick={() => handleDelete(contact._id)}
-                className="delete-btn"
-              >
-                Delete
-              </button>
-              <hr />
-            </li>
+
+              {/* Read/Unread Badge */}
+              <p className={`status-badge ${contact.read ? "read" : "unread"}`}>
+                {contact.read ? "✅ Read" : "📌 Unread"}
+              </p>
+
+              {/* Buttons */}
+              <div className="btn-group">
+                <button
+                  onClick={() => handleToggleRead(contact._id)}
+                  className="toggle-read-btn"
+                >
+                  Mark as {contact.read ? "Unread" : "Read"}
+                </button>
+                <button
+                  onClick={() => handleDelete(contact._id)}
+                  className="delete-btn"
+                >
+                  ❌ Delete
+                </button>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
