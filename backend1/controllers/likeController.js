@@ -36,6 +36,7 @@ export const toggleLike = async (req, res) => {
 };
 
 // Get total likes for an item
+// Get total likes for an item
 export const getLikes = async (req, res) => {
   const { itemId } = req.params;
   const userId = req.userId; // authMiddleware attaches this
@@ -44,13 +45,18 @@ export const getLikes = async (req, res) => {
 
   try {
     const likeDoc = await Like.findOne({ itemId });
+
     const totalLikes = likeDoc ? likeDoc.likedBy.length : 0;
     const liked = likeDoc ? likeDoc.likedBy.includes(userId) : false;
+    
+    // Get usernames or IDs of all users who liked
+    const likedUsers = likeDoc ? likeDoc.likedBy : [];
 
-    res.json({ totalLikes, liked });
+    res.json({ totalLikes, liked, likedUsers });
   } catch (error) {
     console.error("Error fetching likes:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
+
 

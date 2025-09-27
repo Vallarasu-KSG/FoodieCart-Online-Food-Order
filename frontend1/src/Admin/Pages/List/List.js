@@ -35,7 +35,7 @@ const List = () => {
   const fetchLikesForAll = async (items) => {
     try {
       const promises = items.map(item =>
-        axios.get(`${url}/api/likes/${item._id}`).catch(() => ({ data: { totalLikes: 0, likedUsers: [] } }))
+        axios.get(`${url}/likes/${item._id}`).catch(() => ({ data: { totalLikes: 0, likedUsers: [] } }))
       );
       const resultsArray = await Promise.all(promises);
 
@@ -90,8 +90,15 @@ const List = () => {
     <div className="admin-list">
       <h2 className="list-title">All Foods List</h2>
 
+      {/* Search + Category Filter */}
       <div className="filter-container">
-        <input type="text" placeholder="Search by name..." value={searchText} onChange={handleSearch} className="search-input" />
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchText}
+          onChange={handleSearch}
+          className="search-input"
+        />
         <div className="custom-select-wrapper">
           <select value={category} onChange={handleCategory} className="custom-select">
             {categories.map((cat, idx) => (<option key={idx} value={cat}>{cat}</option>))}
@@ -131,9 +138,10 @@ const List = () => {
                     <AiFillHeart className="heart-icon-admin" />
                     {likeInfo.totalLikes ?? 0}
                     {likeInfo.likedUsers.length > 0 && (
-                      <span className="liked-users-tooltip" title={likeInfo.likedUsers.join(", ")}>
-                        {/* Optional: small info icon */}
-                      </span>
+                      <span
+                        className="liked-users-tooltip"
+                        title={likeInfo.likedUsers.join(", ")}
+                      ></span>
                     )}
                   </td>
                   <td className="close">
@@ -163,9 +171,10 @@ const List = () => {
                 <p>
                   <AiFillHeart className="heart-icon-admin" /> {likeInfo.totalLikes ?? 0}
                   {likeInfo.likedUsers.length > 0 && (
-                    <span className="liked-users-tooltip" title={likeInfo.likedUsers.join(", ")}>
-                      {/* Tooltip on hover */}
-                    </span>
+                    <span
+                      className="liked-users-tooltip"
+                      title={likeInfo.likedUsers.join(", ")}
+                    ></span>
                   )}
                 </p>
               </div>
