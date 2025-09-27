@@ -58,57 +58,62 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== Card Content ===== */
+/* ===== Date Top ===== */
+.contact-card .date {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+/* ===== Name ===== */
 .contact-card h3 {
   margin: 0 0 8px;
   color: #0077ff;
   font-size: 1.3rem;
 }
 
+/* ===== Message ===== */
 .contact-card .message {
   font-style: italic;
   margin: 10px 0;
   color: #444;
 }
 
-.contact-card .date {
-  font-size: 0.85rem;
-  color: #777;
-  margin-bottom: 10px;
-}
-
-/* ===== Read/Unread Badge ===== */
+/* ===== Status Badge ===== */
 .status-badge {
   display: inline-block;
-  padding: 6px 12px;
+  padding: 4px 10px;
   border-radius: 12px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
-  margin-bottom: 10px;
+  margin: 5px 0;
   color: white;
   transition: 0.3s ease;
 }
 
 .status-badge.read {
-  background-color: #2a9d8f; /* green */
+  background-color: #2a9d8f;
 }
 
 .status-badge.unread {
-  background-color: #e63946; /* red */
+  background-color: #e63946;
 }
 
 /* ===== Buttons ===== */
 .btn-group {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .toggle-read-btn {
   background: #f4a261;
   color: white;
   border: none;
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 0.85rem;
@@ -124,10 +129,9 @@
   background: #e63946;
   color: white;
   border: none;
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 0.85rem;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
@@ -160,19 +164,9 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== Responsive Design ===== */
-@media (max-width: 1024px) {
-  .page-title { font-size: 2rem; }
-}
-
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .page-title { font-size: 1.8rem; }
   .search-box { width: 90%; }
-}
-
-@media (max-width: 480px) {
-  .page-title { font-size: 1.6rem; }
-  .contact-card { padding: 15px; }
   .btn-group { flex-direction: column; }
-  .toggle-read-btn, .delete-btn { width: 100%; }
 }

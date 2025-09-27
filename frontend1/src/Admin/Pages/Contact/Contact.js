@@ -5,11 +5,11 @@ const Contact = () => {
   const [contacts, setContacts] = useState([]);
   const [search, setSearch] = useState("");
 
-  // Fetch all contacts
+  // Fetch contacts
   const fetchContacts = async () => {
     try {
       const response = await fetch(
-        `https://food-order-website-backend-final.onrender.com/api/contact`
+        "https://food-order-website-backend-final.onrender.com/api/contact"
       );
       const data = await response.json();
       setContacts(data);
@@ -22,38 +22,13 @@ const Contact = () => {
     fetchContacts();
   }, []);
 
-  // Handle Delete
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this message?")) return;
-
-    try {
-      const response = await fetch(
-        `https://food-order-website-backend-final.onrender.com/api/contact/${id}`,
-        { method: "DELETE" }
-      );
-
-      const result = await response.json();
-
-      if (response.ok) {
-        alert(result.message);
-        setContacts(contacts.filter((contact) => contact._id !== id));
-      } else {
-        alert(result.error);
-      }
-    } catch (error) {
-      console.error("Error deleting contact:", error);
-      alert("Something went wrong while deleting.");
-    }
-  };
-
-  // Handle Toggle Read/Unread
+  // Toggle Read/Unread
   const handleToggleRead = async (id) => {
     try {
       const response = await fetch(
         `https://food-order-website-backend-final.onrender.com/api/contact/${id}/read`,
         { method: "PATCH" }
       );
-
       const result = await response.json();
       if (response.ok) {
         setContacts(
@@ -70,7 +45,30 @@ const Contact = () => {
     }
   };
 
-  // Filter contacts by search
+  // Delete Contact
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this message?")) return;
+
+    try {
+      const response = await fetch(
+        `https://food-order-website-backend-final.onrender.com/api/contact/${id}`,
+        { method: "DELETE" }
+      );
+
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message);
+        setContacts(contacts.filter((c) => c._id !== id));
+      } else {
+        alert(result.error);
+      }
+    } catch (error) {
+      console.error("Error deleting contact:", error);
+      alert("Something went wrong while deleting.");
+    }
+  };
+
+  // Search filter
   const filteredContacts = contacts.filter(
     (contact) =>
       contact.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -96,9 +94,7 @@ const Contact = () => {
         <div className="contact-grid">
           {filteredContacts.map((contact) => (
             <div key={contact._id} className="contact-card">
-              <h3>{contact.name}</h3>
-              <p><strong>Email:</strong> {contact.email}</p>
-              <p className="message">“{contact.message}”</p>
+              {/* Date/Time on top */}
               <p className="date">
                 {new Date(contact.date).toLocaleString("en-IN", {
                   dateStyle: "medium",
@@ -106,7 +102,11 @@ const Contact = () => {
                 })}
               </p>
 
-              {/* Read/Unread Badge */}
+              <h3>{contact.name}</h3>
+              <p><strong>Email:</strong> {contact.email}</p>
+              <p className="message">“{contact.message}”</p>
+
+              {/* Status Badge */}
               <p className={`status-badge ${contact.read ? "read" : "unread"}`}>
                 {contact.read ? "✅ Read" : "📌 Unread"}
               </p>
