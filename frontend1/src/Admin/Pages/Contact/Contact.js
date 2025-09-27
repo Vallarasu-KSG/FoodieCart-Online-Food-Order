@@ -107,12 +107,12 @@ const Contact = () => {
                 })}
               </p>
 
-              <h3>{contact.name}</h3>
-              <p><strong>Email:</strong> {contact.email}</p>
-              <p className="message">“{contact.message}”</p>
+              <h3><strong>Name : </strong> {contact.name}</h3>
+              <p><strong>Email : </strong> {contact.email}</p>
+              <p className="message"><strong>Message : </strong> “{contact.message}”</p>
 
               <p className={`status-badge ${contact.read ? "read" : "unread"}`}>
-                {contact.read ? "✅ Read" : "📌 Unread"}
+                {contact.read ? "Read" : "Unread"}
               </p>
 
               <div className="btn-group">
@@ -125,9 +125,7 @@ const Contact = () => {
                 <button
                   onClick={() => handleDelete(contact._id)}
                   className="delete-btn"
-                >
-                  ❌ Delete
-                </button>
+                > Delete </button>
               </div>
             </div>
           ))}
