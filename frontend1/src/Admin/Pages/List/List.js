@@ -1,20 +1,15 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import './List.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { assets } from '../../assets/assets';
-import { AiFillHeart } from "react-icons/ai";
-import { StoreContext } from '../../../Context/StoreContext'; // assuming admin token is stored here
 
 const List = () => {
   const url = "https://food-order-website-backend-final.onrender.com";
-  const { token } = useContext(StoreContext); // admin login token
   const [list, setList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [category, setCategory] = useState('All');
-  const [likesData, setLikesData] = useState({}); 
-  // { itemId: { totalLikes: 0, likedUsers: [] } }
 
   // Fetch all food items
   const fetchList = async () => {
@@ -23,39 +18,12 @@ const List = () => {
       if (response.data.success) {
         setList(response.data.data);
         setFilteredList(response.data.data);
-        fetchLikesForAll(response.data.data);
       } else {
         toast.error("Error fetching food list");
       }
     } catch (error) {
       toast.error("Error fetching food list");
       console.error(error);
-    }
-  };
-
-  // Fetch likes for all items concurrently
-  const fetchLikesForAll = async (items) => {
-    if (!token) return; // skip if no token
-    try {
-      const promises = items.map(item =>
-        axios.get(`${url}/likes/${item._id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        }).catch(() => ({ data: { totalLikes: 0, likedUsers: [] } }))
-      );
-
-      const resultsArray = await Promise.all(promises);
-
-      const results = {};
-      items.forEach((item, index) => {
-        results[item._id] = {
-          totalLikes: resultsArray[index].data.totalLikes || 0,
-          likedUsers: resultsArray[index].data.likedUsers || []
-        };
-      });
-
-      setLikesData(results);
-    } catch (err) {
-      console.error("Failed to fetch likes for all:", err);
     }
   };
 
@@ -124,72 +92,46 @@ const List = () => {
               <th>Price</th>
               <th>Offer Price</th>
               <th>Address</th>
-              <th>Likes</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {filteredList.map((item, index) => {
-              const likeInfo = likesData[item._id] || { totalLikes: 0, likedUsers: [] };
-              return (
-                <tr key={item._id}>
-                  <td>{index + 1}</td>
-                  <td><img src={`${url}/images/${item.image}`} alt={item.name} /></td>
-                  <td>{item.name}</td>
-                  <td>{item.category}</td>
-                  <td>{item.price}</td>
-                  <td>{item.offerPrice}</td>
-                  <td>{item.address}</td>
-                  <td>
-                    <AiFillHeart className="heart-icon-admin" />
-                    {likeInfo.totalLikes ?? 0}
-                    {likeInfo.likedUsers.length > 0 && (
-                      <span
-                        className="liked-users-tooltip"
-                        title={likeInfo.likedUsers.join(", ")}
-                      ></span>
-                    )}
-                  </td>
-                  <td className="close">
-                    <img onClick={() => removeFood(item._id)} src={assets.close_icon} alt="Remove" />
-                  </td>
-                </tr>
-              );
-            })}
+            {filteredList.map((item, index) => (
+              <tr key={item._id}>
+                <td>{index + 1}</td>
+                <td><img src={`${url}/images/${item.image}`} alt={item.name} /></td>
+                <td>{item.name}</td>
+                <td>{item.category}</td>
+                <td>{item.price}</td>
+                <td>{item.offerPrice}</td>
+                <td>{item.address}</td>
+                <td className="close">
+                  <img onClick={() => removeFood(item._id)} src={assets.close_icon} alt="Remove" />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
       {/* Mobile Cards */}
       <div className="mobile-cards">
-        {filteredList.map((item, index) => {
-          const likeInfo = likesData[item._id] || { totalLikes: 0, likedUsers: [] };
-          return (
-            <div className="card" key={item._id}>
-              <div className="card-img"><img src={`${url}/images/${item.image}`} alt={item.name} /></div>
-              <div className="card-info">
-                <p><strong>No:</strong> {index + 1}</p>
-                <p><strong>Name:</strong> {item.name}</p>
-                <p><strong>Category:</strong> {item.category}</p>
-                <p><strong>Price:</strong> {item.price}</p>
-                <p><strong>Offer Price:</strong> {item.offerPrice}</p>
-                <p><strong>Address:</strong> {item.address}</p>
-                <p>
-                  <AiFillHeart className="heart-icon-admin" /> {likeInfo.totalLikes ?? 0}
-                  {likeInfo.likedUsers.length > 0 && (
-                    <span
-                      className="liked-users-tooltip"
-                      title={likeInfo.likedUsers.join(", ")}
-                    ></span>
-                  )}
-                </p>
-              </div>
-              <div className="card-action">
-                <img onClick={() => removeFood(item._id)} src={assets.close_icon} alt="Remove" />
-              </div>
+        {filteredList.map((item, index) => (
+          <div className="card" key={item._id}>
+            <div className="card-img"><img src={`${url}/images/${item.image}`} alt={item.name} /></div>
+            <div className="card-info">
+              <p><strong>No:</strong> {index + 1}</p>
+              <p><strong>Name:</strong> {item.name}</p>
+              <p><strong>Category:</strong> {item.category}</p>
+              <p><strong>Price:</strong> {item.price}</p>
+              <p><strong>Offer Price:</strong> {item.offerPrice}</p>
+              <p><strong>Address:</strong> {item.address}</p>
             </div>
-          );
-        })}
+            <div className="card-action">
+              <img onClick={() => removeFood(item._id)} src={assets.close_icon} alt="Remove" />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
