@@ -1,0 +1,140 @@
+/* ---------------- BASE ---------------- */
+.admin-add {
+  max-width: 900px;
+  margin: 16vh auto 40px auto; /* leave space for top navbar */
+  padding: 20px;
+  background: #f8fafc; /* light gray background */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.admin-add form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ---------------- IMAGE UPLOAD ---------------- */
+.add-img-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-img-upload p.tittle {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.add-img-upload img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px dashed #cbd5e1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-img-upload img:hover {
+  transform: scale(1.05);
+  border-color: #3b82f6; /* blue border on hover */
+}
+
+/* ---------------- INPUT FIELDS ---------------- */
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+input[type="text"], select {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, select:focus {
+  border-color: #3b82f6; /* blue border on focus */
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+/* ---------------- MULTI-COLUMN LAYOUT ---------------- */
+.add-category-price {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.add-category, .add-price, .add-offerPrice {
+  flex: 1;
+  min-width: 150px;
+}
+
+/* ---------------- ADDRESS ---------------- */
+.add-product-address {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------------- BUTTON ---------------- */
+.add-btn {
+  padding: 12px;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  background-color: #2563eb;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .admin-add {
+    margin: 60px 20px;
+    padding: 20px;
+  }
+
+  .add-category-price {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .add-category, .add-price, .add-offerPrice {
+    flex: 1 1 30%;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .admin-add {
+    margin: 60px 10px 40px 10px;
+    padding: 15px;
+  }
+
+  .add-category-price {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .add-category, .add-price, .add-offerPrice {
+    flex: 1;
+  }
+
+  .add-img-upload img {
+    width: 100px;
+    height: 100px;
+  }
+}

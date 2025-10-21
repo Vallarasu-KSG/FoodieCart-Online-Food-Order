@@ -1,0 +1,20 @@
+const express = require("express");
+const { addFood } = require("../controllers/FoodController.js");
+const multer = require("multer");
+
+const FoodRoute = express.Router();
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads"); // Ensure 'uploads' directory exists
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`); // Fix file naming
+    }
+});
+
+const upload = multer({ storage: storage });
+
+FoodRoute.post("/add", upload.single("image"), addFood);
+
+module.exports = FoodRoute;

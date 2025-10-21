@@ -1,0 +1,171 @@
+.explore-menu-navigation { 
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Ensure elements wrap on smaller screens */
+}
+
+.explore-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start; /* Corrected from 'left' */
+}
+
+.explore-menu-text {
+    max-width: 60%;
+    text-align: left;
+}
+
+.all-option {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.all-option.active {
+    color: black;
+}
+
+/* Wrapper to hold buttons + scroll area */
+.explore-menu-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.explore-menu-list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    text-align: center;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Hide scrollbar for modern browsers */
+    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+    padding: 10px 40px; /* add spacing so items don’t hide behind buttons */
+}
+
+.explore-menu-list::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+.explore-menu-list-item img {
+    width: 144px;
+    min-width: 144px;
+    height: 180px;
+    min-height: 180px;
+    border-radius: 50px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.fdimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.explore-menu hr {
+    height: 2px;
+    border: none;
+    background-color: #ccc;
+}
+
+.explore-menu-list-item .active {
+    border: 2px solid black;
+    padding: 2px;
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.scroll-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.scroll-btn.left {
+    left: 0;
+}
+
+.scroll-btn.right {
+    right: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .explore-menu-text {
+        padding: 0 10px;
+        max-width: 100%;
+    }
+
+    .explore-menu-list {
+        gap: 20px;
+        padding: 10px 30px;
+    }
+
+    .explore-menu-list-item img {
+        width: 120px;
+        height: 150px;
+        border-radius: 30px;
+    }
+}
+
+@media (max-width: 460px) {
+    .explore-menu {
+        padding: 0 6px;
+    }
+    .explore-menu h1{
+        font-size: 20px;
+    }
+    .explore-menu p{
+        font-size: 15px;
+    }
+    .explore-menu-text {
+        text-align: justify;
+        max-width: 100%;
+        font-size: 16px;
+    }
+    .explore-menu-list {
+        gap: 10px;
+        padding: 10px 25px;
+    }
+    .explore-menu-list-item img {
+        min-width: 50px;
+        min-height: 50px;
+        width: 80px;
+        height: 90px;
+        border-radius: 20px;
+    }
+    .all-option {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .scroll-btn {
+        font-size: 18px;
+        padding: 5px 8px;
+    }
+}

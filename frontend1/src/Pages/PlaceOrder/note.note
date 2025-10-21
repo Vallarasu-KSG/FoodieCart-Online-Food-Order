@@ -1,0 +1,158 @@
+import React, { useState } from "react";
+import './PlaceOrder.css';
+import { useLocation, useNavigate } from "react-router-dom";
+
+const PlaceOrder = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { cartItems = [], subtotal = 0, discount = 0, deliveryFee = 0, tax = 0, totalAmount = 0 } = location.state || {};
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    contact: "",
+    building: "",
+    street: "",
+    city: "",
+    state: "",
+    pinCode: "",
+    country: ""
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.firstName.trim()) newErrors.firstName = "First name is required.";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required.";
+    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "A valid email is required.";
+    if (!formData.contact.trim() || !/^\d{10}$/.test(formData.contact))
+      newErrors.contact = "A valid 10-digit phone number is required.";
+    if (!formData.pinCode.trim() || !/^\d{6}$/.test(formData.pinCode))
+      newErrors.pinCode = "A valid 6-digit pin code is required.";
+    // Add more validation as needed
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleConfirmOrder = () => {
+    if (validateForm()) {
+      navigate('/payment', { state: {formData, totalAmount, cartItems } });
+    }
+  };
+
+  
+
+  return (
+    <div className="placeOrder">
+      <div className="place-Order-Left">
+        <p className="title">Delivery Information</p>
+        <div className="multi-fields">
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            value={formData.firstName}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={formData.lastName}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="multi-fields">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+          <input
+            type="tel"
+            name="contact"
+            placeholder="Contact"
+            value={formData.contact}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="multi-fields">
+          <input
+            type="text"
+            name="building"
+            placeholder="Building No"
+            value={formData.building}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="street"
+            placeholder="Street"
+            value={formData.street}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="multi-fields">
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            value={formData.city}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="state"
+            placeholder="State"
+            value={formData.state}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="multi-fields">
+          <input
+            type="text"
+            name="pinCode"
+            placeholder="Pin Code"
+            value={formData.pinCode}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="country"
+            placeholder="Country"
+            value={formData.country}
+            onChange={handleInputChange}
+          />
+        </div>
+        {Object.keys(errors).map((key) => (
+          <p key={key} className="error">
+            {errors[key]}
+          </p>
+        ))}
+      </div>
+      <div className="place-Order-Right">
+        <h1>Order Total</h1>
+        <div>
+          <p>Subtotal: ₹ {subtotal.toFixed(2)}</p>
+          <p>Discount: - ₹ {discount.toFixed(2)}</p>
+          <p>Delivery Fee: ₹ {deliveryFee.toFixed(2)}</p>
+          <p>Tax: ₹ {tax.toFixed(2)}</p>
+          <p>Total: ₹ {totalAmount.toFixed(2)}</p>
+        </div>
+        <button onClick={handleConfirmOrder}>Confirm Order</button>
+      </div>
+    </div>
+  );
+};
+
+export default PlaceOrder;

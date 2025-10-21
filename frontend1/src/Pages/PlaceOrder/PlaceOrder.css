@@ -1,0 +1,299 @@
+/* 🛒 Place Order Page Base Layout */
+.placeOrder-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 30px;
+  width: 100%;
+  background: #f9f9f9;
+  flex-wrap: wrap;
+}
+
+/* LEFT SIDE (Address + Promo Section) */
+.place-Order-Left-side {
+  flex: 1.5;
+  min-width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.placeOrder-header-section .title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.placeOrder-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.placeOrder-form-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.placeOrder-form-container input {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.placeOrder-form-container input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.3);
+}
+
+/* 🏷️ Promo Code Section */
+.placeOrder-promocode {
+  margin-top: 25px;
+  background: #f8f8f8;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.placeOrder-promocode p {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.cart-promocode-input {
+  display: flex;
+  gap: 10px;
+}
+
+.cart-promocode-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.cart-promocode-input button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cart-promocode-input button:hover {
+  background: #0056b3;
+}
+
+.promo-success {
+  color: #0b8e36;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.promo-error {
+  color: #d32f2f;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.promo-code-sti {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+/* RIGHT SIDE (Summary + Payment Section) */
+.place-Order-Right-side {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* 🧾 Order Summary */
+.Summary-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.Summary-container h1 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.Summary-container p {
+  margin: 6px 0;
+  color: #555;
+}
+
+.Summary-container .total {
+  font-weight: 600;
+  font-size: 18px;
+  color: #007bff;
+}
+
+/* 💳 Payment Section */
+.payment-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.payment-container h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.payment-options {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.payment-options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.cash-section,
+.upi-section,
+.card-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cash-section input,
+.upi-section input,
+.card-section input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+/* Confirm Button */
+.place-Order-Right-side button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.place-Order-Right-side button:hover {
+  background: #0056b3;
+}
+
+.place-Order-Right-side button:disabled {
+  background: #b0b0b0;
+  cursor: not-allowed;
+}
+
+/* Popup Styling */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-box {
+  background: white;
+  padding: 25px 35px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.popup-box p {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.popup-box button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.popup-overlay.success .popup-box {
+  border-top: 4px solid #0b8e36;
+}
+
+.popup-overlay.error .popup-box {
+  border-top: 4px solid #d32f2f;
+}
+
+/* 📱 RESPONSIVE DESIGN */
+
+/* Medium devices (tablets) */
+@media (max-width: 992px) {
+  .placeOrder-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .place-Order-Left-side,
+  .place-Order-Right-side {
+    width: 100%;
+  }
+
+  .place-Order-Right-side {
+    gap: 20px;
+  }
+}
+
+/* Small devices (mobile) */
+@media (max-width: 600px) {
+  .placeOrder-container {
+    padding: 15px;
+  }
+
+  .placeOrder-form-container {
+    flex-direction: column;
+  }
+
+  .cart-promocode-input {
+    flex-direction: column;
+  }
+
+  .payment-options {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .place-Order-Right-side button {
+    font-size: 15px;
+  }
+}

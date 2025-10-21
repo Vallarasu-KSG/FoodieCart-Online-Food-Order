@@ -1,0 +1,150 @@
+.contact-container {
+  max-width: 1200px;
+  margin: 10vh auto auto auto;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+  animation: fadeInDown 0.8s ease-in-out;
+}
+
+.search-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px 15px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.search-box:focus {
+  border-color: #0077ff;
+  box-shadow: 0 0 10px rgba(0, 119, 255, 0.3);
+  outline: none;
+}
+
+.date-group {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.group-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 15px;
+  border-left: 5px solid #0077ff;
+  padding-left: 10px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.contact-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  text-align: left;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.contact-card .date {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.contact-card h3 {
+  margin: 0 0 8px;
+  color: #0077ff;
+  font-size: 1.3rem;
+}
+
+.message {
+  font-style: italic;
+  margin: 10px 0;
+  color: #444;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 5px 0;
+  color: white;
+}
+
+.status-badge.read {
+  background-color: #2a9d8f;
+}
+
+.status-badge.unread {
+  background-color: #e63946;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.toggle-read-btn {
+  background: #f4a261;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.toggle-read-btn:hover {
+  background: #e76f51;
+}
+
+.delete-btn {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #d62828;
+}
+
+.no-data {
+  font-size: 1.1rem;
+  color: #666;
+  margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-title { font-size: 1.8rem; }
+  .search-box { width: 90%; }
+  .btn-group { flex-direction: column; }
+}

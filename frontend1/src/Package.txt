@@ -1,0 +1,11 @@
+1. npm i react-router-dom
+2.npm i axios
+npm install formik yup axios react-router-dom
+3.npm i react-toastify
+4.npm i react-icons
+
+admin package: -
+
+1.npm i axios
+2.npm i react-toastify
+3.npm i react-router-dom

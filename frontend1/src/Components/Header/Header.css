@@ -1,0 +1,91 @@
+.header {
+    height: 34vw;
+    margin: 0px auto 30px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./Food-Logo.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.header-contents {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5vw;
+    max-width: 50%;
+    bottom: 10%;
+    left: 6vw;
+    animation: fadeIn 3s;
+}
+
+.header-contents h2 {
+    font-weight: 500;
+    color: white;
+    font-size: max(4.5vw, 22px);
+}
+
+.header-contents p {
+    color: white;
+    font-size: 1.2vw;
+}
+
+.header-contents button {
+    border: none;
+    font-weight: 400;
+    padding: 0.7vw 2.1vw;
+    background-color: white;
+    font-size: max(1.2vw, 13px);
+    border-radius: 50px;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .header {
+        height: 50vw; /* Increase height for better mobile view */
+    }
+
+    .header-contents {
+        gap: 2vw;
+        max-width: 80%;
+        left: 4vw;
+    }
+
+    .header-contents h2 {
+        font-size: max(6vw, 20px); /* Adjust font size for smaller screens */
+    }
+
+    .header-contents p {
+        font-size: 3.5vw; /* Larger font size for readability */
+    }
+
+    .header-contents button {
+        font-size: max(3vw, 12px);
+        padding: 1vw 3vw;
+    }
+}
+
+@media (max-width: 460px) {
+    .header {
+        height: 45vw; /* Adjust height for extra small screens */
+    }
+
+    .header-contents {
+        gap: 3vw;
+        max-width: 90%;
+        left: 5vw;
+    }
+
+    .header-contents h2 {
+        font-size: 4vw; /* Further reduce font size */
+    }
+
+    .header-contents p {
+        font-size: 3vw;
+    }
+
+    .header-contents button {
+        font-size: 3.5vw;
+        padding: 2vw 4vw;
+    }
+}

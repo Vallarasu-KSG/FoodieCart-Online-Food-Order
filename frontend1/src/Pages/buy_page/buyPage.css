@@ -1,0 +1,133 @@
+/* General Cart Styling */
+.cart {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cart .title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Table Styling */
+.cart-items {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-items th,
+.cart-items td {
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #ddd;
+}
+
+.cart-items th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+
+.cart-items td {
+  background-color: #fff;
+}
+
+.cart-items img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Remove icon hover */
+.cart-items svg {
+  cursor: pointer;
+  fill: #ff4d4f;
+  transition: transform 0.2s, fill 0.2s;
+}
+
+.cart-items svg:hover {
+  transform: scale(1.2);
+  fill: #d9363e;
+}
+
+/* Checkout Button */
+.cart-items button {
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.cart-items button:hover {
+  background-color: #0b70d4;
+  transform: scale(1.05);
+}
+
+/* Total Row */
+.cart-total-row td {
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #f8f8f8;
+}
+
+/* Responsive Styling */
+
+/* Tablets */
+@media (max-width: 992px) {
+  .cart-items img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .cart-items th,
+  .cart-items td {
+    padding: 10px 6px;
+    font-size: 13px;
+  }
+
+  .cart-items button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .cart-items {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .cart-items tr {
+    display: table-row;
+  }
+
+  .cart-items th,
+  .cart-items td {
+    min-width: 120px;
+  }
+
+  .cart-items img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cart-items button {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .cart-total-row td {
+    min-width: auto;
+  }
+}

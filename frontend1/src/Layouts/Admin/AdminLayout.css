@@ -1,0 +1,50 @@
+/* Layout Container */
+.admin-content {
+  display: flex;
+  min-height: 100vh;
+  transition: all 0.3s ease-in-out;
+  background-color: #f1f5f9; /* light gray for content */
+  position: relative;
+}
+
+/* Sidebar section */
+.sidebar {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Main content */
+.s {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  transition: margin-left 0.3s ease-in-out;
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+/* Collapse Button */
+.collapse-btn {
+  position: absolute;
+  top: 20px;
+  left: 240px;
+  background: #1e293b; /* dark block */
+  color: #ffffff;      /* white text */
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: left 0.3s ease-in-out;
+  z-index: 1100;
+}
+
+/* When collapsed */
+.admin-content.collapsed .collapse-btn {
+  left: 80px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .collapse-btn {
+    display: none; /* Hide collapse button in tablet/mobile */
+  }
+}

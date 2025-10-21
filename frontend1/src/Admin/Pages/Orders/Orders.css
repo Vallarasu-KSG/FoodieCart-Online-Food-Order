@@ -1,0 +1,112 @@
+/* Orders.css */
+
+/* Container for the whole page */
+.orders-page {
+  margin-top: 5vh;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.orders-page h2 {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Orders list container */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual order card */
+.order-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Parcel image */
+.order-icon {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+}
+
+/* Order details */
+.order-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Order items text */
+.order-items {
+  font-weight: 500;
+  color: #555;
+}
+
+/* Customer info section */
+.customer-info {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #444;
+}
+
+.customer-name {
+  font-weight: 600;
+}
+
+.customer-address,
+.customer-contact {
+  margin: 2px 0;
+}
+
+/* Order summary */
+.order-summary {
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+/* Status dropdown */
+.status-dropdown {
+  margin-top: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  width: max-content;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.status-dropdown:hover {
+  border-color: #888;
+}
+
+/* Responsive for tablets and mobile */
+@media (max-width: 768px) {
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-icon {
+    margin-bottom: 10px;
+  }
+}
